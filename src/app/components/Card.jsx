@@ -20,7 +20,7 @@ const Card = ({
               }) => {
 
     return (
-        <CardBootstrap style={{ width: '18rem' }}>
+        <CardBootstrap className="card-wrapper">
             <CardBootstrap.Body>
                 <CardBootstrap.Title>{title}</CardBootstrap.Title>
                 {/*<Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle>*/}

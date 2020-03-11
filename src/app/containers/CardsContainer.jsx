@@ -2,30 +2,32 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 // Redux
-// import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+    cardsFetchRequested as cardsFetchAction,
+} from '../redux/actions/cards';
 // Selectors
 // Libs
-import axios from '../__mock__/axios';
+// import axios from '../__mock__/axios';
 // Components
 import Cards from '../components/Cards';
 
 
 const CardsContainer = props => {
+    const dispatch = useDispatch();
 
-    const [cardsData, setCardsData] = useState([]);
+    const cardsData = useSelector(state => state.cards.collection);
+    const isLoadingCards = useSelector(state => state.cards.loading);
 
     useEffect(() => {
-        axios.get('/cards')
-            .then(cardsResponse => {
-                setCardsData(cardsResponse.data)
-            })
-            .catch(error => {
-                console.log(error);
-            })
+        dispatch(cardsFetchAction())
     }, []);
 
     return (
-        <Cards cardsData={cardsData} />
+        <Cards
+            cardsData={cardsData}
+            isLoading={isLoadingCards}
+        />
     )
 
 };

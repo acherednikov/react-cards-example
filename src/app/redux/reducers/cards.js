@@ -9,11 +9,14 @@ import {
     BOOKMARK_CARD_SUCCEEDED,
     BOOKMARK_CARD_FAILED,
 } from '../actions/cards';
+// Services
+import NormalizerService from '../../services/NormalizerService';
 
 const initialState = {
     collection: [],
     bookmarkedCardIds: [],
     loading: false,
+    bookmarkingOnCard: null,
     fetchError: null,
     bookmarkError: null,
 };
@@ -29,7 +32,7 @@ export default function reducer(state = initialState, action) {
         case FETCH_CARDS_SUCCEEDED:
             return {
                 ...state,
-                collection: action.payload.collection,
+                collection: NormalizerService.normalizeCards(action.payload.collection),
                 loading: false,
                 fetchError: null,
             };
@@ -39,12 +42,25 @@ export default function reducer(state = initialState, action) {
                 loading: false,
                 fetchError: action.payload.error,
             };
-        // case BOOKMARK_CARD_SUCCEEDED:
         case BOOKMARK_CARD_REQUESTED:
-            console.log('-> BOOKMARK_CARD_SUCCEEDED', xor(state.bookmarkedCardIds, [action.payload.cardId]))
             return {
                 ...state,
+                bookmarkingOnCard: action.payload.cardId,
+            };
+        case BOOKMARK_CARD_SUCCEEDED:
+            return {
+                ...state,
+                bookmarkingOnCard: null,
                 bookmarkedCardIds: xor(state.bookmarkedCardIds, [action.payload.cardId])
+            };
+        case BOOKMARK_CARD_FAILED:
+            return {
+                ...state,
+                bookmarkingOnCard: null,
+                bookmarkError: {
+                    error: action.payload.error,
+                    cardId: action.payload.cardId,
+                },
             };
         default:
             return state;

@@ -3,3 +3,12 @@
   width: 400px;
   margin: 10px;
 }
+
+.card-text {
+  display: block;/* or inline-block */
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  overflow: hidden;
+  max-height: 3.6em;
+  line-height: 1.8em;
+}

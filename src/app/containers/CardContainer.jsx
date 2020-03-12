@@ -11,7 +11,6 @@ import { isCardBookmarkedSelector } from '../selectors/card';
 // Components
 import Card from '../components/Card';
 
-// TODO object shape of?
 const propTypes = {
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
@@ -27,6 +26,7 @@ const CardContainer = ({
     const dispatch = useDispatch();
 
     const isBookmarked = useSelector(state => isCardBookmarkedSelector(state, id));
+    const isBookmarking = useSelector(state => state.cards.bookmarkingOnCard === id);
 
     const handleBookmark = () => {
         dispatch(cardBookmarkAction(id))
@@ -38,6 +38,7 @@ const CardContainer = ({
             title={title}
             text={text}
             isBookmarked={isBookmarked}
+            isBookmarking={isBookmarking}
             handleBookmark={handleBookmark}
         />
     )

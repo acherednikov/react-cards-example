@@ -36,15 +36,17 @@ export const cardBookmarkRequested = (cardId = null) => ({
     }
 });
 
-export const cardBookmarkSucceeded = () => ({
+export const cardBookmarkSucceeded = (cardId = null) => ({
     type: BOOKMARK_CARD_SUCCEEDED,
     payload: {
+        cardId,
     }
 });
 
-export const cardBookmarkFailed = (error) => ({
+export const cardBookmarkFailed = (cardId, error) => ({
     type: BOOKMARK_CARD_FAILED,
     payload: {
+        cardId,
         error: error.message
     },
     error: true,

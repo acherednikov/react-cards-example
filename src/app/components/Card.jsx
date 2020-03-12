@@ -12,10 +12,12 @@ const propTypes = {
     title: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
     isBookmarked: PropTypes.bool,
+    isBookmarking: PropTypes.bool,
     handleBookmark: PropTypes.func,
 };
 const defaultProps = {
     isBookmarked: false,
+    isBookmarking: false,
     handleBookmark: () => {},
 };
 
@@ -23,6 +25,7 @@ const Card = ({
                   title,
                   text,
                   isBookmarked,
+                  isBookmarking,
                   handleBookmark,
               }) => {
 
@@ -31,7 +34,9 @@ const Card = ({
             <CardBootstrap.Body>
                 <CardBootstrap.Title>{title}</CardBootstrap.Title>
                 {/*<Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle>*/}
-                <CardBootstrap.Text>
+                <CardBootstrap.Text
+                    className="card-text"
+                >
                     {text}
                 </CardBootstrap.Text>
 
@@ -43,6 +48,7 @@ const Card = ({
 
                 <Button
                     variant={isBookmarked ? 'success' : 'primary'}
+                    disabled={isBookmarking}
                     onClick={handleBookmark}
                 >
                     {isBookmarked ? 'Bookmarked' : 'Bookmark'}

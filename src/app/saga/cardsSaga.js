@@ -50,7 +50,7 @@ function* bookmarkCard(action) {
         yield call(_cardBookmarkRequest, cardId);
         yield put(cardBookmarkSucceeded(cardId))
     } catch (error) {
-        yield put(cardBookmarkFailed(error))
+        yield put(cardBookmarkFailed(action.payload.cardId, error))
     } finally {
     }
 }

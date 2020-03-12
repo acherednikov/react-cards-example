@@ -3,14 +3,13 @@ import axios from "../../__mock__/axios";
 
 function fetchCards() {
     return axios.get('/cards')
-    .then(cardsResponse => {
-        return cardsResponse
-    })
-    .catch(error => {
-        throw error
-    })
+}
+
+function bookmarkCard(cardId) {
+    return axios.post('/cards')
 }
 
 export default {
     fetchCards,
+    bookmarkCard,
 }

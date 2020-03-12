@@ -7,7 +7,7 @@ import Row from 'react-bootstrap/Row';
 import Spinner from 'react-bootstrap/Spinner';
 import Col from 'react-bootstrap/Col';
 // Components
-import Card from './Card';
+import CardContainer from '../containers/CardContainer';
 
 const propTypes = {
     cardsData: PropTypes.array,
@@ -24,10 +24,11 @@ const Cards = ({
                    isLoading,
                }) => {
 
-    const renderCard = ({ title, text }, index) => {
+    const renderCard = ({ id, title, text }) => {
         return (
-            <Card
-                key={index}
+            <CardContainer
+                key={id}
+                id={id}
                 text={text}
                 title={title}
             />

@@ -11,12 +11,19 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 const propTypes = {
     title: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
+    isBookmarked: PropTypes.bool,
+    handleBookmark: PropTypes.func,
 };
-const defaultProps = {};
+const defaultProps = {
+    isBookmarked: false,
+    handleBookmark: () => {},
+};
 
 const Card = ({
                   title,
                   text,
+                  isBookmarked,
+                  handleBookmark,
               }) => {
 
     return (
@@ -27,8 +34,20 @@ const Card = ({
                 <CardBootstrap.Text>
                     {text}
                 </CardBootstrap.Text>
-                <CardBootstrap.Link href="#">Card Link</CardBootstrap.Link>
-                <Button variant="primary">Go somewhere</Button>
+
+                <Button
+                    variant="danger"
+                >
+                    Delete
+                </Button>
+
+                <Button
+                    variant={isBookmarked ? 'success' : 'primary'}
+                    onClick={handleBookmark}
+                >
+                    {isBookmarked ? 'Bookmarked' : 'Bookmark'}
+                </Button>
+
             </CardBootstrap.Body>
         </CardBootstrap>
     )

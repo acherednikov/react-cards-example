@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Spinner from 'react-bootstrap/Spinner';
-import Col from 'react-bootstrap/Col';
+// import Col from 'react-bootstrap/Col';
 // Components
 import CardContainer from '../containers/CardContainer';
 
@@ -38,10 +38,16 @@ const Cards = ({
     const cardsRenderer = cardsData.map(renderCard);
 
     return (
-        <Container>
+        <Container className="d-flex justify-content-center align-items-center">
             <Row>
-                {isLoading && <Spinner animation="border"/>}
-                {!isLoading && cardsRenderer}
+                {
+                    isLoading &&
+                    <Spinner animation="border"/>
+                }
+                {
+                    !isLoading &&
+                    cardsRenderer
+                }
             </Row>
         </Container>
     )

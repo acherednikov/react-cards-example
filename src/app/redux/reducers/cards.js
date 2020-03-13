@@ -1,5 +1,5 @@
 // Libs
-import xor from 'lodash/xor';
+import { concat, pull, xor } from 'lodash';
 // Actions
 import {
     FETCH_CARDS_REQUESTED,
@@ -8,17 +8,23 @@ import {
     BOOKMARK_CARD_REQUESTED,
     BOOKMARK_CARD_SUCCEEDED,
     BOOKMARK_CARD_FAILED,
+    DELETE_CARD_REQUESTED,
+    DELETE_CARD_SUCCEEDED,
+    DELETE_CARD_FAILED,
 } from '../actions/cards';
 // Services
 import NormalizerService from '../../services/NormalizerService';
 
+
 const initialState = {
-    collection: [],
-    bookmarkedCardIds: [],
+    collection: {},
     loading: false,
-    bookmarkingOnCard: null,
-    fetchError: null,
-    bookmarkError: null,
+    bookmarkedCardIds: [],
+    deletedCardIds: [], //trashcan
+    processingCardIds: [],
+    fetchError: {},
+    bookmarkError: {},
+    deleteError: {},
 };
 
 export default function reducer(state = initialState, action) {
@@ -45,20 +51,40 @@ export default function reducer(state = initialState, action) {
         case BOOKMARK_CARD_REQUESTED:
             return {
                 ...state,
-                bookmarkingOnCard: action.payload.cardId,
+                processingCardIds: concat(state.processingCardIds, action.payload.cardId),
             };
         case BOOKMARK_CARD_SUCCEEDED:
             return {
                 ...state,
-                bookmarkingOnCard: null,
+                processingCardIds: pull(state.processingCardIds, action.payload.cardId),
                 bookmarkedCardIds: xor(state.bookmarkedCardIds, [action.payload.cardId])
             };
         case BOOKMARK_CARD_FAILED:
             return {
                 ...state,
-                bookmarkingOnCard: null,
+                processingCardIds: pull(state.processingCardIds, action.payload.cardId),
                 bookmarkError: {
-                    error: action.payload.error,
+                    message: action.payload.error,
+                    cardId: action.payload.cardId,
+                },
+            };
+        case DELETE_CARD_REQUESTED:
+            return {
+                ...state,
+                processingCardIds: concat(state.processingCardIds, action.payload.cardId),
+            };
+        case DELETE_CARD_SUCCEEDED:
+            return {
+                ...state,
+                processingCardIds: pull(state.processingCardIds, action.payload.cardId),
+                deletedCardIds: xor(state.deletedCardIds, [action.payload.cardId])
+            };
+        case DELETE_CARD_FAILED:
+            return {
+                ...state,
+                processingCardIds: pull(state.processingCardIds, action.payload.cardId),
+                deleteError: {
+                    message: action.payload.error,
                     cardId: action.payload.cardId,
                 },
             };

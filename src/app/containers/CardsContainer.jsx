@@ -7,9 +7,21 @@ import {
     cardsFetchRequested as cardsFetchAction,
 } from '../redux/actions/cards';
 // Selectors
-import { cardsAsArraySelector } from '../selectors/card';
+import {
+    cardsAsArray as cardsAsArraySelector,
+} from '../selectors/card';
 // Components
 import Cards from '../components/Cards';
+
+
+const propTypes = {
+    cardsData: PropTypes.array,
+    isLoadingCards: PropTypes.bool,
+};
+const defaultProps = {
+    cardsData: [],
+    isLoadingCards: false,
+};
 
 
 const CardsContainer = props => {
@@ -20,7 +32,7 @@ const CardsContainer = props => {
 
     useEffect(() => {
         dispatch(cardsFetchAction())
-    }, []);
+    }, [dispatch]);
 
     return (
         <Cards
@@ -30,5 +42,8 @@ const CardsContainer = props => {
     )
 
 };
+
+CardsContainer.propTypes = propTypes;
+CardsContainer.defaultProps = defaultProps;
 
 export default CardsContainer;

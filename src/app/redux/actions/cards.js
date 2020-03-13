@@ -6,6 +6,10 @@ export const BOOKMARK_CARD_REQUESTED = 'cards/BOOKMARK_CARD_REQUESTED';
 export const BOOKMARK_CARD_SUCCEEDED = 'cards/BOOKMARK_CARD_SUCCEEDED';
 export const BOOKMARK_CARD_FAILED = 'cards/BOOKMARK_CARD_FAILED';
 
+export const DELETE_CARD_REQUESTED = 'cards/DELETE_CARD_REQUESTED';
+export const DELETE_CARD_SUCCEEDED = 'cards/DELETE_CARD_SUCCEEDED';
+export const DELETE_CARD_FAILED = 'cards/DELETE_CARD_FAILED';
+
 
 export const cardsFetchRequested = (queryOptions = {}) => ({
     type: FETCH_CARDS_REQUESTED,
@@ -44,6 +48,29 @@ export const cardBookmarkSucceeded = (cardId = null) => ({
 });
 
 export const cardBookmarkFailed = (cardId, error) => ({
+    type: BOOKMARK_CARD_FAILED,
+    payload: {
+        cardId,
+        error: error.message
+    },
+    error: true,
+});
+
+export const cardDeleteRequested = (cardId = null) => ({
+    type: DELETE_CARD_REQUESTED,
+    payload: {
+        cardId,
+    }
+});
+
+export const cardDeleteSucceeded = (cardId = null) => ({
+    type: DELETE_CARD_SUCCEEDED,
+    payload: {
+        cardId,
+    }
+});
+
+export const cardDeleteFailed = (cardId, error) => ({
     type: BOOKMARK_CARD_FAILED,
     payload: {
         cardId,

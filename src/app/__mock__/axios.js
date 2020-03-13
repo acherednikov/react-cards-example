@@ -1,4 +1,3 @@
-'use strict';
 const faker = require('faker');
 
 let data = [];
@@ -11,21 +10,19 @@ for (let i = 0; i < 6; i++) {
     })
 }
 
+const delayedPromise = (delayMin = 0, delayMax = 100, response = {}) => {
+    return new Promise((resolve, reject) => {
+        let wait = setTimeout(() => {
+            clearTimeout(wait);
+            resolve({data});
+        },
+        Math.floor(Math.random() * (delayMax - delayMin + 1) + delayMin)
+        )
+    })
+};
+
 module.exports = {
-    get: () => {
-        return new Promise((resolve, reject) => {
-            let wait = setTimeout(() => {
-                clearTimeout(wait);
-                resolve({data});
-            }, Math.floor(Math.random() * 1500) + 300)
-        })
-    },
-    post: () => {
-        return new Promise((resolve, reject) => {
-            let wait = setTimeout(() => {
-                clearTimeout(wait);
-                resolve({});
-            }, Math.floor(Math.random() * 500) + 200)
-        })
-    }
+    get: () => { return delayedPromise(300, 1500, data) },
+    post: () => { return delayedPromise(300, 700) },
+    delete: () => { return delayedPromise(200, 500) },
 };

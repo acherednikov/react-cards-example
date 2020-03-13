@@ -12,21 +12,24 @@ const propTypes = {
     title: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
     isBookmarked: PropTypes.bool,
-    isBookmarking: PropTypes.bool,
+    isProcessing: PropTypes.bool,
     handleBookmark: PropTypes.func,
+    handleDelete: PropTypes.func,
 };
 const defaultProps = {
     isBookmarked: false,
-    isBookmarking: false,
+    isProcessing: false,
     handleBookmark: () => {},
+    handleDelete: () => {},
 };
 
 const Card = ({
                   title,
                   text,
                   isBookmarked,
-                  isBookmarking,
+                  isProcessing,
                   handleBookmark,
+                  handleDelete,
               }) => {
 
     return (
@@ -39,21 +42,21 @@ const Card = ({
                 >
                     {text}
                 </CardBootstrap.Text>
-
                 <Button
                     variant="danger"
+                    style={{ marginRight: 5 }}
+                    disabled={isProcessing}
+                    onClick={handleDelete}
                 >
                     Delete
                 </Button>
-
                 <Button
                     variant={isBookmarked ? 'success' : 'primary'}
-                    disabled={isBookmarking}
+                    disabled={isProcessing}
                     onClick={handleBookmark}
                 >
                     {isBookmarked ? 'Bookmarked' : 'Bookmark'}
                 </Button>
-
             </CardBootstrap.Body>
         </CardBootstrap>
     )

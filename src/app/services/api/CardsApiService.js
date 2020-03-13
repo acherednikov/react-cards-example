@@ -1,15 +1,20 @@
 // Libs
 import axios from "../../__mock__/axios";
 
-function fetchCards() {
-    return axios.get('/cards')
+function fetchCards(queryOptions) {
+    return axios.get('/cards', queryOptions)
 }
 
 function bookmarkCard(cardId) {
-    return axios.post('/cards')
+    return axios.post(`cards/${cardId}`)
+}
+
+function deleteCard(cardId) {
+    return axios.delete(`cards/${cardId}`)
 }
 
 export default {
     fetchCards,
     bookmarkCard,
+    deleteCard,
 }

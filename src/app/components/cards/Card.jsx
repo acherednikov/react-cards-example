@@ -11,14 +11,16 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 const propTypes = {
     title: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
-    isBookmarked: PropTypes.bool,
     isProcessing: PropTypes.bool,
+    isBookmarked: PropTypes.bool,
+    isDeleted: PropTypes.bool,
     handleBookmark: PropTypes.func,
     handleDelete: PropTypes.func,
 };
 const defaultProps = {
-    isBookmarked: false,
     isProcessing: false,
+    isBookmarked: false,
+    isDeleted: false,
     handleBookmark: () => {},
     handleDelete: () => {},
 };
@@ -26,8 +28,9 @@ const defaultProps = {
 const Card = ({
                   title,
                   text,
-                  isBookmarked,
                   isProcessing,
+                  isBookmarked,
+                  isDeleted,
                   handleBookmark,
                   handleDelete,
               }) => {
@@ -42,14 +45,17 @@ const Card = ({
                 >
                     {text}
                 </CardBootstrap.Text>
-                <Button
-                    variant="danger"
-                    style={{ marginRight: 5 }}
-                    disabled={isProcessing}
-                    onClick={handleDelete}
-                >
-                    Delete
-                </Button>
+                {
+                    !isDeleted &&
+                    <Button
+                        variant="danger"
+                        style={{ marginRight: 5 }}
+                        disabled={isProcessing}
+                        onClick={handleDelete}
+                    >
+                        Delete
+                    </Button>
+                }
                 <Button
                     variant={isBookmarked ? 'success' : 'primary'}
                     disabled={isProcessing}

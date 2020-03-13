@@ -6,14 +6,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
     cardBookmarkRequested as cardBookmarkAction,
     cardDeleteRequested as cardDeleteAction,
-} from '../redux/actions/cards';
+} from '../../redux/actions/cards';
 // Selectors
 import {
-    isCardBookmarked as isCardBookmarkedSelector,
     isCardProcessing as isCardProcessingSelector,
-} from '../selectors/card';
+    isCardBookmarked as isCardBookmarkedSelector,
+    isCardDeleted as isCardDeletedSelector,
+} from '../../selectors/card';
 // Components
-import Card from '../components/Card';
+import Card from '../../components/cards/Card';
 
 const propTypes = {
     id: PropTypes.number.isRequired,
@@ -29,8 +30,9 @@ const CardContainer = ({
               }) => {
     const dispatch = useDispatch();
 
-    const isBookmarked = useSelector(state => isCardBookmarkedSelector(state, id));
     const isProcessing = useSelector(state => isCardProcessingSelector(state, id));
+    const isBookmarked = useSelector(state => isCardBookmarkedSelector(state, id));
+    const isDeleted = useSelector(state => isCardDeletedSelector(state, id));
 
     const handleBookmark = () => {
         dispatch(cardBookmarkAction(id))
@@ -45,8 +47,9 @@ const CardContainer = ({
             id={id}
             title={title}
             text={text}
-            isBookmarked={isBookmarked}
             isProcessing={isProcessing}
+            isBookmarked={isBookmarked}
+            isDeleted={isDeleted}
             handleBookmark={handleBookmark}
             handleDelete={handleDelete}
         />

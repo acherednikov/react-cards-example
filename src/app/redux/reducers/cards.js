@@ -1,5 +1,3 @@
-// Libs
-import { concat, pull, xor } from 'lodash';
 // Actions
 import {
     FETCH_CARDS_REQUESTED,
@@ -13,7 +11,7 @@ import {
     DELETE_CARD_FAILED,
 } from '../actions/cards';
 // Services
-import NormalizerService from '../../services/NormalizerService';
+import CardsUtils from '../../services/CardsUtils';
 
 
 const initialState = {
@@ -38,7 +36,8 @@ export default function reducer(state = initialState, action) {
         case FETCH_CARDS_SUCCEEDED:
             return {
                 ...state,
-                collection: NormalizerService.normalizeCards(action.payload.collection),
+                // collection: CardsUtils.collectionNormalized(action.payload.collection),
+                collection: action.payload.collection,
                 loading: false,
                 fetchError: null,
             };
@@ -51,18 +50,18 @@ export default function reducer(state = initialState, action) {
         case BOOKMARK_CARD_REQUESTED:
             return {
                 ...state,
-                processingCardIds: concat(state.processingCardIds, action.payload.cardId),
+                processingCardIds: CardsUtils.idsConcat(state.processingCardIds, action.payload.cardId),
             };
         case BOOKMARK_CARD_SUCCEEDED:
             return {
                 ...state,
-                processingCardIds: pull(state.processingCardIds, action.payload.cardId),
-                bookmarkedCardIds: xor(state.bookmarkedCardIds, [action.payload.cardId])
+                processingCardIds: CardsUtils.idRemove(state.processingCardIds, action.payload.cardId),
+                bookmarkedCardIds: CardsUtils.idsToggle(state.bookmarkedCardIds, action.payload.cardId),
             };
         case BOOKMARK_CARD_FAILED:
             return {
                 ...state,
-                processingCardIds: pull(state.processingCardIds, action.payload.cardId),
+                processingCardIds: CardsUtils.idRemove(state.processingCardIds, action.payload.cardId),
                 bookmarkError: {
                     message: action.payload.error,
                     cardId: action.payload.cardId,
@@ -71,18 +70,18 @@ export default function reducer(state = initialState, action) {
         case DELETE_CARD_REQUESTED:
             return {
                 ...state,
-                processingCardIds: concat(state.processingCardIds, action.payload.cardId),
+                processingCardIds: CardsUtils.idsConcat(state.processingCardIds, action.payload.cardId),
             };
         case DELETE_CARD_SUCCEEDED:
             return {
                 ...state,
-                processingCardIds: pull(state.processingCardIds, action.payload.cardId),
-                deletedCardIds: xor(state.deletedCardIds, [action.payload.cardId])
+                processingCardIds: CardsUtils.idRemove(state.processingCardIds, action.payload.cardId),
+                deletedCardIds: CardsUtils.idsToggle(state.deletedCardIds, action.payload.cardId),
             };
         case DELETE_CARD_FAILED:
             return {
                 ...state,
-                processingCardIds: pull(state.processingCardIds, action.payload.cardId),
+                processingCardIds: CardsUtils.idRemove(state.processingCardIds, action.payload.cardId),
                 deleteError: {
                     message: action.payload.error,
                     cardId: action.payload.cardId,

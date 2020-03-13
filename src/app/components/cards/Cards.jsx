@@ -2,12 +2,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 // Libs
+import isEmpty from 'lodash/isEmpty';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Spinner from 'react-bootstrap/Spinner';
-// import Col from 'react-bootstrap/Col';
 // Components
-import CardContainer from '../containers/CardContainer';
+import NavigationBar from '../navigation/NavigationBar';
+import CardContainer from '../../containers/cards/CardContainer';
 
 const propTypes = {
     cardsData: PropTypes.array,
@@ -38,18 +39,27 @@ const Cards = ({
     const cardsRenderer = cardsData.map(renderCard);
 
     return (
-        <Container className="d-flex justify-content-center align-items-center">
-            <Row>
-                {
-                    isLoading &&
-                    <Spinner animation="border"/>
-                }
-                {
-                    !isLoading &&
-                    cardsRenderer
-                }
-            </Row>
-        </Container>
+        <>
+            <NavigationBar />
+            <Container className="d-flex justify-content-center align-items-center">
+                <Row>
+                    {
+                        isLoading &&
+                        <Spinner animation="border"/>
+                    }
+                    {
+                        !isLoading &&
+                        cardsRenderer
+                    }
+                    {
+                        (isEmpty(cardsRenderer) && !isLoading) &&
+                        <div>
+                            No cards
+                        </div>
+                    }
+                </Row>
+            </Container>
+        </>
     )
 };
 

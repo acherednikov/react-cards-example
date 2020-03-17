@@ -24,5 +24,6 @@ const delayedPromise = (delayMin = 0, delayMax = 100, response = {}) => {
 module.exports = {
     get: () => { return delayedPromise(300, 1500, data) },
     post: () => { return delayedPromise(300, 700) },
+    patch: () => { return delayedPromise(400, 800) },
     delete: () => { return delayedPromise(200, 500) },
 };

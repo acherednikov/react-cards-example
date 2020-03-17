@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
     cardBookmarkRequested as cardBookmarkAction,
     cardDeleteRequested as cardDeleteAction,
+    cardRestoreRequested as cardRestoreAction,
 } from '../../redux/actions/cards';
 // Selectors
 import {
@@ -42,6 +43,10 @@ const CardContainer = ({
         dispatch(cardDeleteAction(id))
     };
 
+    const handleRestore = () => {
+        dispatch(cardRestoreAction(id))
+    };
+
     return (
         <Card
             id={id}
@@ -52,6 +57,7 @@ const CardContainer = ({
             isDeleted={isDeleted}
             handleBookmark={handleBookmark}
             handleDelete={handleDelete}
+            handleRestore={handleRestore}
         />
     )
 };

@@ -7,11 +7,11 @@ import { NavLink } from 'react-router-dom';
 import { Navbar, Nav } from 'react-bootstrap';
 
 
-import 'bootstrap/dist/css/bootstrap.min.css';
-
 const propTypes = {
+
 };
 const defaultProps = {
+
 };
 
 const NavigationBar = props => {

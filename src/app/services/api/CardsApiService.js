@@ -13,8 +13,13 @@ function deleteCard(cardId) {
     return axios.delete(`cards/${cardId}`)
 }
 
+function restoreCard(cardId) {
+    return axios.patch(`cards/${cardId}`)
+}
+
 export default {
     fetchCards,
     bookmarkCard,
     deleteCard,
+    restoreCard,
 }

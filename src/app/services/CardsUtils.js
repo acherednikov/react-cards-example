@@ -12,11 +12,11 @@ function collectionFilteredByIds(cards, cardIds, reverse = false) {
     })
 }
 
-function idsConcat(cardIds, cardId) {
+function idConcat(cardIds, cardId) {
     return concat(cardIds, cardId)
 }
 
-function idsToggle(cardIds, cardId) {
+function idToggle(cardIds, cardId) {
     return xor(cardIds, [cardId])
 }
 
@@ -27,7 +27,7 @@ function idRemove(cardIds, cardId) {
 export default {
     collectionNormalized,
     collectionFilteredByIds,
-    idsConcat,
-    idsToggle,
+    idConcat,
+    idToggle,
     idRemove,
 }

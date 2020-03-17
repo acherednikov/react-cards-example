@@ -5,12 +5,15 @@ import {
     FETCH_CARDS_REQUESTED,
     BOOKMARK_CARD_REQUESTED,
     DELETE_CARD_REQUESTED,
+    RESTORE_CARD_REQUESTED,
     cardsFetchSucceeded,
     cardsFetchFailed,
     cardBookmarkSucceeded,
     cardBookmarkFailed,
     cardDeleteSucceeded,
     cardDeleteFailed,
+    cardRestoreSucceeded,
+    cardRestoreFailed,
 } from '../redux/actions/cards';
 // Services
 import CardsApiService from '../services/api/CardsApiService';
@@ -26,6 +29,10 @@ function _cardBookmarkRequest(cardId) {
 
 function _cardDeleteRequest(cardId) {
     return CardsApiService.deleteCard(cardId)
+}
+
+function _cardRestoreRequest(cardId) {
+    return CardsApiService.restoreCard(cardId)
 }
 
 function* fetchCards(action) {
@@ -58,10 +65,21 @@ function* deleteCard(action) {
     }
 }
 
+function* restoreCard(action) {
+    try {
+        const { cardId } = action.payload;
+        yield call(_cardRestoreRequest, cardId);
+        yield put(cardRestoreSucceeded(cardId))
+    } catch (error) {
+        yield put(cardRestoreFailed(action.payload.cardId, error))
+    }
+}
+
 function* cardsSaga() {
     yield takeLatest(FETCH_CARDS_REQUESTED, fetchCards);
     yield takeEvery(BOOKMARK_CARD_REQUESTED, bookmarkCard);
-    yield takeEvery(DELETE_CARD_REQUESTED, deleteCard)
+    yield takeEvery(DELETE_CARD_REQUESTED, deleteCard);
+    yield takeEvery(RESTORE_CARD_REQUESTED, deleteCard)
 }
 
 export default cardsSaga;

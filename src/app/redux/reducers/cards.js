@@ -21,7 +21,7 @@ import CardsUtils from '../../services/CardsUtils';
 
 const initialState = {
     collection: {},
-    isFetching: false,
+    isFetching: true,
     bookmarkedCardIds: [],
     deletedCardIds: [], //trashcan
     processingCardIds: [],

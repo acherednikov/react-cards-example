@@ -3,7 +3,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 // Libs
 import isEmpty from 'lodash/isEmpty';
-import Spinner from 'react-bootstrap/Spinner';
 // Components
 import NavigationBar from '../navigation/NavigationBar';
 import CardContainer from '../../containers/cards/CardContainer';
@@ -14,7 +13,7 @@ const propTypes = {
 };
 const defaultProps = {
     cardsData: [],
-    isLoading: false,
+    isLoading: true,
 };
 
 
@@ -42,7 +41,7 @@ const Cards = ({
             <div className="cards-container">
                 {
                     isLoading &&
-                    <Spinner animation="border"/>
+                    <div uk-spinner="ratio: 2"/>
                 }
                 {
                     !isLoading &&

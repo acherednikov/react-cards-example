@@ -6,9 +6,12 @@ import store from './app/redux'
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-toastify/dist/ReactToastify.css';
+import UIkit from 'uikit';
+import Icons from 'uikit/dist/js/uikit-icons';
 import * as serviceWorker from './serviceWorker';
-
 import CardsContainer from './app/containers/cards/CardsContainer';
+
+UIkit.use(Icons);
 
 ReactDOM.render(
     <BrowserRouter>

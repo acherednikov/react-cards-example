@@ -13,3 +13,4 @@ code {
 }
 
 @import "assets/stylesheets/application.scss";
+@import "~uikit/dist/css/uikit.min.css";

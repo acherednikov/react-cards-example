@@ -2,8 +2,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 // Libs
-import Button from 'react-bootstrap/Button';
-import { Card as CardBootstrap } from 'react-bootstrap';
 // Components
 import ModalConfirm from '../ModalConfirm';
 
@@ -62,48 +60,63 @@ const Card = ({
                 onConfirm={restoreConfirmed}
                 onClose={restoreCanceled}
             />
-            <div className="card-wrapper">
-                <CardBootstrap.Body className="card-content">
-                    <div className="card-title">
-                        <h5>
-                            {title}
-                        </h5>
+            <div className="uk-card uk-card-default uk-margin-small-bottom uk-width-1-1">
+                <div className="uk-card-header">
+                    <div className="uk-grid-small uk-flex-middle uk-grid" uk-grid="">
+                        <div className="uk-width-auto uk-first-column">
+                            {/*<img className="uk-border-circle" width="40" height="40" src="images/avatar.jpg"/>*/}
+                        </div>
+                        <div className="uk-width-expand">
+                            <h3 className="uk-card-title uk-margin-remove-bottom flex-grow-1">{title}</h3>
+                            {/*<p className="uk-text-meta uk-margin-remove-top">*/}
+                            {/*    <time dateTime="2016-04-01T19:00">April 01, 2016</time>*/}
+                            {/*</p>*/}
+                        </div>
+                        <a onClick={handleBookmark}>
+                            <span uk-icon="heart"/>
+                        </a>
                     </div>
-                    <p className="card-text">
-                        {text}
-                    </p>
-                    <div className="card-controls-wrapper">
-                        {
-                            !isDeleted &&
-                            <Button
-                                variant="danger"
-                                style={{ marginRight: 5 }}
-                                disabled={isProcessing}
-                                onClick={handleDelete}
-                            >
-                                Delete
-                            </Button>
-                        }
-                        {
-                            isDeleted &&
-                            <Button
-                                variant="warning"
-                                style={{ marginRight: 5 }}
-                                disabled={isProcessing}
-                                onClick={restoreRequested}
-                            >
-                                Restore
-                            </Button>
-                        }
-                        <Button
-                            variant={isBookmarked ? 'success' : 'primary'}
+                </div>
+                <div className="uk-card-body">
+                    <p>{text}</p>
+                </div>
+                <div className="uk-card-footer">
+                    {
+                        !isDeleted &&
+                        <button
+                            // variant="danger"
+                            className="uk-button uk-button-danger"
+                            style={{ marginRight: 5 }}
+                            disabled={isProcessing}
+                            onClick={handleDelete}
+                        >
+                            Delete
+                        </button>
+                    }
+                    {
+                        isDeleted &&
+                        <button
+                            // variant="warning"
+                            className="uk-button uk-button-secondary"
+                            style={{ marginRight: 5 }}
+                            disabled={isProcessing}
+                            onClick={restoreRequested}
+                        >
+                            Restore
+                        </button>
+                    }
+                    {
+                        !isDeleted &&
+                        <button
+                            // variant={isBookmarked ? 'success' : 'primary'}
+                            className={isBookmarked ? 'uk-button uk-button-primary' : 'uk-button uk-button-default'}
                             disabled={isProcessing}
                             onClick={handleBookmark}
                         >
                             {isBookmarked ? 'Bookmarked' : 'Bookmark'}
-                        </Button>
-                    </div>
-                </CardBootstrap.Body>
+                        </button>
+                    }
+                </div>
             </div>
         </>
     )

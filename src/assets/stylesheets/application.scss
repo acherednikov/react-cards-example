@@ -6,7 +6,8 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin: 0 auto;
+  //margin: 0 auto;
+  padding-top: 20px;
   line-height: 1.3;
   padding-left: 10%;
   padding-right: 10%;
@@ -17,9 +18,9 @@
   width: 300px;
   margin: 1%;
 
-  border: 1px solid lightsteelblue;
-  border-radius: 2px;
-  box-shadow: 0 3px 34px rgba(0,0,0,.0941176);
+  //border: 1px solid lightsteelblue;
+  //border-radius: 2px;
+  //box-shadow: 0 3px 34px rgba(0,0,0,.0941176);
 }
 
 .card-content {
@@ -32,7 +33,7 @@
 }
 
 .card-title {
-  border-bottom: 1px solid lightblue ;
+  border-bottom: 1px solid lightblue;
 }
 
 .card-text {

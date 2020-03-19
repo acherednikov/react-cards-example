@@ -1,4 +1,4 @@
-import { includes } from 'lodash';
+import { includes, filter } from 'lodash';
 import { createSelector } from 'reselect';
 import CardsUtils from '../services/CardsUtils';
 
@@ -45,5 +45,13 @@ export const isCardDeleted = createSelector(
     (_, cardId) => cardId,
     (cardsState = {}, cardId = null) => {
         return includes(cardsState.deletedCardIds, cardId)
+    }
+);
+
+export const cardActionErrors = createSelector(
+    (state, cardId) => state.cards,
+    (_, cardId) => cardId,
+    (cardsState = {}, cardId = null) => {
+        return filter(cardsState.cardErrors, { cardId })
     }
 );

@@ -3,8 +3,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 // Libs
 import isEmpty from 'lodash/isEmpty';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
 import Spinner from 'react-bootstrap/Spinner';
 // Components
 import NavigationBar from '../navigation/NavigationBar';
@@ -41,24 +39,22 @@ const Cards = ({
     return (
         <>
             <NavigationBar />
-            <Container className="d-flex justify-content-center align-items-center">
-                <Row>
-                    {
-                        isLoading &&
-                        <Spinner animation="border"/>
-                    }
-                    {
-                        !isLoading &&
-                        cardsRenderer
-                    }
-                    {
-                        (isEmpty(cardsRenderer) && !isLoading) &&
-                        <div>
-                            No cards
-                        </div>
-                    }
-                </Row>
-            </Container>
+            <div className="cards-container">
+                {
+                    isLoading &&
+                    <Spinner animation="border"/>
+                }
+                {
+                    !isLoading &&
+                    cardsRenderer
+                }
+                {
+                    (isEmpty(cardsRenderer) && !isLoading) &&
+                    <div>
+                        No cards
+                    </div>
+                }
+            </div>
         </>
     )
 };

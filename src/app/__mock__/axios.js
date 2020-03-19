@@ -2,7 +2,7 @@ const faker = require('faker');
 
 let data = [];
 
-for (let i = 0; i < 6; i++) {
+for (let i = 0; i < 20; i++) {
     data.push({
         id: i + 1,
         title: faker.company.companyName(),
@@ -21,9 +21,26 @@ const delayedPromise = (delayMin = 0, delayMax = 100, response = {}) => {
     })
 };
 
+const get = () => {
+    return delayedPromise(300, 1500, data)
+};
+
+const post = () => {
+    return delayedPromise(400, 800)
+};
+
+const patch = () => {
+    return delayedPromise(500, 1000)
+};
+
+const _delete = () => {
+    return delayedPromise(400, 800)
+};
+
+
 module.exports = {
-    get: () => { return delayedPromise(300, 1500, data) },
-    post: () => { return delayedPromise(300, 700) },
-    patch: () => { return delayedPromise(400, 800) },
-    delete: () => { return delayedPromise(200, 500) },
+    get,
+    post,
+    patch,
+    delete: _delete,
 };

@@ -19,12 +19,15 @@ import {
 import CardsApiService from '../services/api/CardsApiService';
 
 
-function _cardsCollectionRequest(queryOptions = {}) {
-    return CardsApiService.fetchCards(queryOptions)
+function _cardsCollectionRequest() {
+    return CardsApiService.fetchCards()
 }
 
 function _cardBookmarkRequest(cardId) {
     return CardsApiService.bookmarkCard(cardId)
+    // return new Promise((resolve, reject) => {
+    //     reject(new Error('oops! server cannot bookmark this card...'))
+    // })
 }
 
 function _cardDeleteRequest(cardId) {
@@ -37,8 +40,7 @@ function _cardRestoreRequest(cardId) {
 
 function* fetchCards(action) {
     try {
-        const { queryOptions } = action.payload;
-        const cardsResponse = yield call(_cardsCollectionRequest, queryOptions);
+        const cardsResponse = yield call(_cardsCollectionRequest);
         yield put(cardsFetchSucceeded(cardsResponse.data))
     } catch (error) {
         yield put(cardsFetchFailed(error))
@@ -79,7 +81,7 @@ function* cardsSaga() {
     yield takeLatest(FETCH_CARDS_REQUESTED, fetchCards);
     yield takeEvery(BOOKMARK_CARD_REQUESTED, bookmarkCard);
     yield takeEvery(DELETE_CARD_REQUESTED, deleteCard);
-    yield takeEvery(RESTORE_CARD_REQUESTED, deleteCard)
+    yield takeEvery(RESTORE_CARD_REQUESTED, restoreCard)
 }
 
 export default cardsSaga;

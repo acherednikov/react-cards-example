@@ -1,3 +1,5 @@
+import { createAction } from 'redux-actions';
+
 export const FETCH_CARDS_REQUESTED = 'cards/FETCH_CARDS_REQUESTED';
 export const FETCH_CARDS_SUCCEEDED = 'cards/FETCH_CARDS_SUCCEEDED';
 export const FETCH_CARDS_FAILED = 'cards/FETCH_CARDS_FAILED';
@@ -14,94 +16,35 @@ export const RESTORE_CARD_REQUESTED = 'cards/RESTORE_CARD_REQUESTED';
 export const RESTORE_CARD_SUCCEEDED = 'cards/RESTORE_CARD_SUCCEEDED';
 export const RESTORE_CARD_FAILED = 'cards/RESTORE_CARD_FAILED';
 
+export const PURGE_CARD_ERROR = 'cards/PURGE_CARD_ERROR';
 
-export const cardsFetchRequested = (queryOptions = {}) => ({
-    type: FETCH_CARDS_REQUESTED,
-    payload: {
-        queryOptions,
-    }
-});
 
-export const cardsFetchSucceeded = (collection) => ({
-    type: FETCH_CARDS_SUCCEEDED,
-    payload: {
-        collection,
-    }
-});
+export const cardsFetchRequested = createAction(FETCH_CARDS_REQUESTED);
+export const cardsFetchSucceeded = createAction(FETCH_CARDS_SUCCEEDED, (collection = []) => ({ collection }));
+export const cardsFetchFailed = createAction(
+    FETCH_CARDS_FAILED,
+    (error = new Error()) => ({ error }),
+);
 
-export const cardsFetchFailed = (error) => ({
-    type: FETCH_CARDS_FAILED,
-    payload: {
-        error: error.message,
-    },
-    error: true,
-});
+export const cardBookmarkRequested = createAction(BOOKMARK_CARD_REQUESTED, cardId => ({ cardId }));
+export const cardBookmarkSucceeded = createAction(BOOKMARK_CARD_SUCCEEDED, cardId => ({ cardId }));
+export const cardBookmarkFailed = createAction(
+    BOOKMARK_CARD_FAILED,
+    (cardId = null, error = new Error()) => ({ cardId, error }),
+);
 
-export const cardBookmarkRequested = (cardId = null) => ({
-    type: BOOKMARK_CARD_REQUESTED,
-    payload: {
-        cardId,
-    }
-});
+export const cardDeleteRequested = createAction(DELETE_CARD_REQUESTED, cardId => ({ cardId }));
+export const cardDeleteSucceeded = createAction(DELETE_CARD_SUCCEEDED, cardId => ({ cardId }));
+export const cardDeleteFailed = createAction(
+    DELETE_CARD_FAILED,
+    (cardId = null, error = new Error()) => ({ cardId, error }),
+);
 
-export const cardBookmarkSucceeded = (cardId = null) => ({
-    type: BOOKMARK_CARD_SUCCEEDED,
-    payload: {
-        cardId,
-    }
-});
+export const cardRestoreRequested = createAction(RESTORE_CARD_REQUESTED, cardId => ({ cardId }));
+export const cardRestoreSucceeded = createAction(RESTORE_CARD_SUCCEEDED, cardId => ({ cardId }));
+export const cardRestoreFailed = createAction(
+    RESTORE_CARD_FAILED,
+    (cardId = null, error = new Error()) => ({ cardId, error }),
+);
 
-export const cardBookmarkFailed = (cardId, error) => ({
-    type: BOOKMARK_CARD_FAILED,
-    payload: {
-        cardId,
-        error: error.message,
-    },
-    error: true,
-});
-
-export const cardDeleteRequested = (cardId = null) => ({
-    type: DELETE_CARD_REQUESTED,
-    payload: {
-        cardId,
-    }
-});
-
-export const cardDeleteSucceeded = (cardId = null) => ({
-    type: DELETE_CARD_SUCCEEDED,
-    payload: {
-        cardId,
-    }
-});
-
-export const cardDeleteFailed = (cardId, error) => ({
-    type: BOOKMARK_CARD_FAILED,
-    payload: {
-        cardId,
-        error: error.message
-    },
-    error: true,
-});
-
-export const cardRestoreRequested = (cardId = null) => ({
-    type: RESTORE_CARD_REQUESTED,
-    payload: {
-        cardId,
-    }
-});
-
-export const cardRestoreSucceeded = (cardId = null) => ({
-    type: RESTORE_CARD_SUCCEEDED,
-    payload: {
-        cardId,
-    }
-});
-
-export const cardRestoreFailed = (cardId, error) => ({
-    type: RESTORE_CARD_FAILED,
-    payload: {
-        cardId,
-        error: error.message,
-    },
-    error: true,
-});
+export const purgeCardError = createAction(PURGE_CARD_ERROR, cardId => ({ cardId }));

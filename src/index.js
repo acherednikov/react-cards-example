@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import store from './app/redux'
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-toastify/dist/ReactToastify.css';
 import * as serviceWorker from './serviceWorker';
 
 import CardsContainer from './app/containers/cards/CardsContainer';

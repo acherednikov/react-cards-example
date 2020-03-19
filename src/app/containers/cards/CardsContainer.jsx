@@ -14,6 +14,8 @@ import {
 } from '../../selectors/card';
 // Libs
 import get from 'lodash/get';
+// Libs
+import { ToastContainer } from 'react-toastify';
 // Components
 import Cards from '../../components/cards/Cards';
 
@@ -34,17 +36,20 @@ const CardsContainer = props => {
     const match = get(useRouteMatch("/:match"), 'params.match', null);
 
     const cardsData = useSelector(state => cardsAsArraySelector(state, match));
-    const isLoadingCards = useSelector(state => state.cards.loading);
+    const isLoadingCards = useSelector(state => state.cards.isFetching);
 
     useEffect(() => {
         dispatch(cardsFetchAction())
     }, [dispatch]);
 
     return (
-        <Cards
-            cardsData={cardsData}
-            isLoading={isLoadingCards}
-        />
+        <>
+            <ToastContainer />
+            <Cards
+                cardsData={cardsData}
+                isLoading={isLoadingCards}
+            />
+        </>
     )
 
 };

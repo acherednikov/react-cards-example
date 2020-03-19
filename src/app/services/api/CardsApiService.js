@@ -1,7 +1,7 @@
 // Libs
 import axios from "../../__mock__/axios";
 
-function fetchCards(queryOptions) {
+function fetchCards(queryOptions = {}) {
     return axios.get('/cards', queryOptions)
 }
 

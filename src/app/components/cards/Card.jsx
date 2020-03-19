@@ -62,46 +62,49 @@ const Card = ({
                 onConfirm={restoreConfirmed}
                 onClose={restoreCanceled}
             />
-            <CardBootstrap className="card-wrapper">
-                <CardBootstrap.Body>
-                    <CardBootstrap.Title>{title}</CardBootstrap.Title>
-                    {/*<Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle>*/}
-                    <CardBootstrap.Text
-                        className="card-text"
-                    >
+            <div className="card-wrapper">
+                <CardBootstrap.Body className="card-content">
+                    <div className="card-title">
+                        <h5>
+                            {title}
+                        </h5>
+                    </div>
+                    <p className="card-text">
                         {text}
-                    </CardBootstrap.Text>
-                    {
-                        !isDeleted &&
+                    </p>
+                    <div className="card-controls-wrapper">
+                        {
+                            !isDeleted &&
+                            <Button
+                                variant="danger"
+                                style={{ marginRight: 5 }}
+                                disabled={isProcessing}
+                                onClick={handleDelete}
+                            >
+                                Delete
+                            </Button>
+                        }
+                        {
+                            isDeleted &&
+                            <Button
+                                variant="warning"
+                                style={{ marginRight: 5 }}
+                                disabled={isProcessing}
+                                onClick={restoreRequested}
+                            >
+                                Restore
+                            </Button>
+                        }
                         <Button
-                            variant="danger"
-                            style={{ marginRight: 5 }}
+                            variant={isBookmarked ? 'success' : 'primary'}
                             disabled={isProcessing}
-                            onClick={handleDelete}
+                            onClick={handleBookmark}
                         >
-                            Delete
+                            {isBookmarked ? 'Bookmarked' : 'Bookmark'}
                         </Button>
-                    }
-                    {
-                        isDeleted &&
-                        <Button
-                            variant="warning"
-                            style={{ marginRight: 5 }}
-                            disabled={isProcessing}
-                            onClick={restoreRequested}
-                        >
-                            Restore
-                        </Button>
-                    }
-                    <Button
-                        variant={isBookmarked ? 'success' : 'primary'}
-                        disabled={isProcessing}
-                        onClick={handleBookmark}
-                    >
-                        {isBookmarked ? 'Bookmarked' : 'Bookmark'}
-                    </Button>
+                    </div>
                 </CardBootstrap.Body>
-            </CardBootstrap>
+            </div>
         </>
     )
 

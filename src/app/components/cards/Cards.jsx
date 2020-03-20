@@ -1,11 +1,16 @@
 // React Core
 import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
+import {
+  Route
+} from "react-router-dom";
 // Libs
 import isEmpty from 'lodash/isEmpty';
 // Components
 import List from '../../components/List';
+import Subscriptions from '../../components/subscriptions/Subscriptions';
 import CardContainer from '../../containers/cards/CardContainer';
+
 
 const propTypes = {
     cardsData: PropTypes.array,
@@ -47,37 +52,36 @@ const Cards = ({
     };
 
     return (
-        <div
-            className="bg"
-            ref={scrollContainer}
-        >
-            <div className="uk-grid">
-                <div className="uk-width-1-4@m">
-                    <div className="filters-container uk-margin-left uk-grid-small uk-child-width-auto uk-grid">
-                        {/*<label><input className="uk-checkbox" type="checkbox" checked/> US</label>*/}
-                        {/*<label><input className="uk-checkbox" type="checkbox"/> Russia</label>*/}
+        <Route exact path={["/", "/cards"]}>
+            <div
+                className="bg"
+                ref={scrollContainer}
+            >
+                <div className="uk-grid">
+                    <div className="uk-width-1-4@m">
+                        <Subscriptions />
                     </div>
-                </div>
-                <div className="uk-width-expand@m">
-                    <div className="cards-container uk-flex uk-flex-wrap uk-flex-middle uk-flex-center">
-                    <List
-                        scrollContainer={scrollContainer}
-                        data={cardsData}
-                        isLoading={isLoading}
-                        cellRenderer={renderCard}
-                        onPageEndReached={handleInfiniteScroll}
-                    />
-                    {
-                        (isEmpty(cardsData) && !isLoading) &&
-                        <p className="uk-flex uk-text-lead">
-                            <span>No cards were found 😔 ...</span>
-                        </p>
-                    }
+                    <div className="uk-width-expand@m">
+                        <div className="cards-container uk-flex uk-flex-wrap uk-flex-middle uk-flex-center">
+                        <List
+                            scrollContainer={scrollContainer}
+                            data={cardsData}
+                            isLoading={isLoading}
+                            cellRenderer={renderCard}
+                            onPageEndReached={handleInfiniteScroll}
+                        />
+                        {
+                            (isEmpty(cardsData) && !isLoading) &&
+                            <p className="uk-flex uk-text-lead">
+                                <span>No cards were found 😔 ...</span>
+                            </p>
+                        }
+                        </div>
                     </div>
+                    <div className="uk-width-1-4@m"></div>
                 </div>
-                <div className="uk-width-1-4@m"></div>
             </div>
-        </div>
+        </Route>
     )
 };
 

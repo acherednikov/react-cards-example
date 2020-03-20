@@ -35,6 +35,7 @@ export default function reducer(state = initialState, action) {
         case FETCH_CARDS_REQUESTED:
             return {
                 ...state,
+                collection: action.payload.performRefresh ? [] : state.collection,
                 isFetching: true,
                 fetchError: null,
             };

@@ -1,5 +1,5 @@
 // React Core
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 // React Router
 import { useRouteMatch } from 'react-router-dom';
@@ -12,6 +12,8 @@ import {
 import {
     cardsAsArray as cardsAsArraySelector,
 } from '../../selectors/card';
+// Hooks
+import useTopic from '../../hooks/useTopic';
 // Libs
 import get from 'lodash/get';
 // Libs
@@ -29,19 +31,25 @@ const defaultProps = {
     isLoadingCards: false,
 };
 
-
 const CardsContainer = props => {
     const dispatch = useDispatch();
 
     const match = get(useRouteMatch("/:match"), 'params.match', null);
 
+    const topic = useTopic();
+    console.log('=> CardsContainer topic', topic)
     const cardsData = useSelector(state => cardsAsArraySelector(state, match));
     const totalResults = useSelector(state => state.cards.total);
     const isLoadingCards = useSelector(state => state.cards.isFetching);
 
-    const requestCardsFetch = (page) => {
+    useEffect(() => {
+        requestCardsFetch(1, true);
+        return () => {}
+    }, [topic]);
+
+    const requestCardsFetch = (page, refresh = false) => {
         if (totalResults !== null && totalResults === cardsData.length) return;
-        dispatch(cardsFetchAction({ page }))
+        dispatch(cardsFetchAction({ page, topic, performRefresh: refresh }))
     };
 
     return (

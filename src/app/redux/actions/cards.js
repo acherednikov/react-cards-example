@@ -19,7 +19,7 @@ export const RESTORE_CARD_FAILED = 'cards/RESTORE_CARD_FAILED';
 export const PURGE_CARD_ERROR = 'cards/PURGE_CARD_ERROR';
 
 
-export const cardsFetchRequested = createAction(FETCH_CARDS_REQUESTED, ({ page }) => ({ page }));
+export const cardsFetchRequested = createAction(FETCH_CARDS_REQUESTED, ({ page, topic, performRefresh }) => ({ page, topic, performRefresh }));
 // export const cardsFetchSucceeded = createAction(FETCH_CARDS_SUCCEEDED, (collection = []) => ({ collection }));
 export const cardsFetchSucceeded = createAction(FETCH_CARDS_SUCCEEDED, ({ articles, totalResults }) => ({ articles, totalResults }));
 export const cardsFetchFailed = createAction(

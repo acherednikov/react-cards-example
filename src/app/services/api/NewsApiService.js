@@ -5,11 +5,11 @@ const API_KEY = '427374fba2eb4ec7a7a913fde6721cf1'; // env var
 
 function fetchFeedTop(queryOptions = {}) {
     const defaultPayload = {
-        category: 'sports',
+        category: 'general',
         country: 'ru',
     };
 
-    return axios.get('http://newsapi.org/v2//top-headlines', {
+    return axios.get('http://newsapi.org/v2/top-headlines', {
         params: { ...defaultPayload, ...queryOptions },
         headers: {
             'Content-Type': 'application/json',

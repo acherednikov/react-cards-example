@@ -39,6 +39,7 @@ const CardsContainer = props => {
     const topic = useTopic();
     console.log('=> CardsContainer topic', topic)
     const cardsData = useSelector(state => cardsAsArraySelector(state, match));
+    const fetchError = useSelector(state => state.cards.fetchError);
     const totalResults = useSelector(state => state.cards.total);
     const isLoadingCards = useSelector(state => state.cards.isFetching);
 
@@ -57,6 +58,7 @@ const CardsContainer = props => {
             <ToastContainer />
             <Cards
                 cardsData={cardsData}
+                fetchError={fetchError}
                 isLoading={isLoadingCards}
                 fetchData={requestCardsFetch}
             />

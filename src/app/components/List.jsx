@@ -2,12 +2,13 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 // Libs
-// import isEmpty from 'lodash/isEmpty';
-// Components
+import isEmpty from 'lodash/isEmpty';
+
 
 const propTypes = {
     scrollContainer: PropTypes.object.isRequired,
     data: PropTypes.array,
+    fetchError: PropTypes.object,
     pageSize: PropTypes.number,
     isLoading: PropTypes.bool,
     cellRenderer: PropTypes.func,
@@ -15,6 +16,7 @@ const propTypes = {
 };
 const defaultProps = {
     data: [],
+    fetchError: null,
     pageSize: 20,
     isLoading: true,
     cellRenderer: () => {},
@@ -23,6 +25,7 @@ const defaultProps = {
 
 const List = ({
                   data,
+                  fetchError,
                   pageSize,
                   isLoading,
                   scrollContainer,
@@ -33,9 +36,7 @@ const List = ({
     const [page, setPage] = useState(0);
 
     const memoizedHandleScroll = useCallback(
-        () => {
-            handleScroll(isLoading, page, scrollContainer, onPageEndReached);
-        },
+        () => handleScroll(isLoading, page, scrollContainer, onPageEndReached),
         [isLoading, page, scrollContainer, onPageEndReached],
     );
 
@@ -49,9 +50,8 @@ const List = ({
     }, [scrollContainer, memoizedHandleScroll]);
 
     useEffect(() => {
-        if (page === 0) {
+        if (page === 0 && fetchError === null) {
             console.log('-> list initial load');
-            // setPage((page) => page + 1);
             setPage(1);
             onPageEndReached(1)
         }
@@ -64,9 +64,8 @@ const List = ({
     }, [isLoading, data, pageSize, setPage]);
 
     function handleScroll(isLoading, page, scrollContainer, onPageEndReached) {
-        if (isLoading) return;
+        if (isLoading || !!fetchError) return;
         if (scrollContainer.current.scrollTop + scrollContainer.current.clientHeight >= scrollContainer.current.scrollHeight) {
-            console.log('==>>> LOAD MORE!!!!', page);
             onPageEndReached(page + 1)
         }
     }
@@ -76,12 +75,29 @@ const List = ({
     return (
         <>
             {
-                // !isLoading &&
                 cardsRenderer
             }
             {
                 isLoading &&
-                <div className="uk-flex" uk-spinner="ratio: 2"/>
+                <div className="uk-flex" uk-spinner="ratio: 2" style={{ color: 'white' }}/>
+            }
+            {
+                (isEmpty(data) && !isLoading) &&
+                <>
+                    <p className="uk-flex uk-text-lead">
+                        <span>
+                            No cards were found 😔 ... 
+                        </span>
+                    </p>
+                    {
+                        !!fetchError &&
+                        <p className="uk-flex uk-text-lead">
+                            <span>
+                                {fetchError.message}
+                            </span>
+                        </p>
+                    }
+                </>
             }
         </>
     )

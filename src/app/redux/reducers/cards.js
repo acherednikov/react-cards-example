@@ -26,7 +26,7 @@ const initialState = {
     bookmarkedCardIds: [],
     deletedCardIds: [], //trashcan
     processingCardIds: [],
-    fetchError: {},
+    fetchError: null,
     cardErrors: [],
 };
 
@@ -37,7 +37,7 @@ export default function reducer(state = initialState, action) {
                 ...state,
                 collection: action.payload.performRefresh ? [] : state.collection,
                 isFetching: true,
-                fetchError: null,
+                // fetchError: null,
             };
         case FETCH_CARDS_SUCCEEDED:
             return {
@@ -52,7 +52,7 @@ export default function reducer(state = initialState, action) {
             return {
                 ...state,
                 isFetching: false,
-                fetchError: action.payload.error,
+                fetchError: action.payload,
             };
         case BOOKMARK_CARD_REQUESTED:
             return {

@@ -1,7 +1,6 @@
 // Libs
 import axios from "axios";
 
-const API_KEY = '427374fba2eb4ec7a7a913fde6721cf1'; // env var
 
 function fetchFeedTop(queryOptions = {}) {
     const defaultPayload = {
@@ -13,7 +12,7 @@ function fetchFeedTop(queryOptions = {}) {
         params: { ...defaultPayload, ...queryOptions },
         headers: {
             'Content-Type': 'application/json',
-            'X-Api-Key': API_KEY,
+            'X-Api-Key': process.env.REACT_APP_NEWS_API_KEY,
         },
         responseType: 'json',
     })

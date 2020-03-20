@@ -14,17 +14,20 @@ import CardContainer from '../../containers/cards/CardContainer';
 
 const propTypes = {
     cardsData: PropTypes.array,
+    fetchError: PropTypes.object,
     isLoading: PropTypes.bool,
     fetchData: PropTypes.func,
 };
 const defaultProps = {
     cardsData: [],
+    fetchError: null,
     isLoading: false,
     fetchData: () => {},
 };
 
 const Cards = ({
                    cardsData,
+                   fetchError,
                    isLoading,
                    fetchData,
                }) => {
@@ -66,16 +69,11 @@ const Cards = ({
                         <List
                             scrollContainer={scrollContainer}
                             data={cardsData}
+                            fetchError={fetchError}
                             isLoading={isLoading}
                             cellRenderer={renderCard}
                             onPageEndReached={handleInfiniteScroll}
                         />
-                        {
-                            (isEmpty(cardsData) && !isLoading) &&
-                            <p className="uk-flex uk-text-lead">
-                                <span>No cards were found 😔 ...</span>
-                            </p>
-                        }
                         </div>
                     </div>
                     <div className="uk-width-1-4@m"></div>

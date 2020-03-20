@@ -25,21 +25,32 @@ const NavigationBar = props => {
 
         return (
             <li className={isActive ? "uk-active" : ""}>
-                <NavLink to={to}>{display}</NavLink>
+                <NavLink
+                    className={isActive ? "" : "nav-el-inactive"}
+                    to={to}
+                >
+                    {display}
+                </NavLink>
             </li>
         )
     }
 
     return (
-        <nav className="uk-navbar-container">
-            <div className="uk-navbar-left">
-                <ul className="uk-navbar-nav">
-                    <ListItemLink to="/" display="Home" />
-                    <ListItemLink to="/bookmarks" display="Bookmarks" />
-                    <ListItemLink to="/trash" display="Trash" />
-                </ul>
+    <nav class="nav-color uk-navbar-container">
+        <div class="uk-navbar-left">
+            <div className="uk-grid uk-width-1-1">
+                <div className="uk-width-1-4">
+                {/* logo */}
+                </div>
+                <div className="uk-width-expand">
+                    <ul class="uk-navbar-nav uk-text-bold">
+                        <ListItemLink to="/cards" display="Featured" />
+                        {/* <ListItemLink to="/search" display="Search" /> */}
+                    </ul>
+                </div>
             </div>
-        </nav>
+        </div>
+    </nav>
     )
 };
 

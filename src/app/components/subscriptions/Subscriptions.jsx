@@ -39,13 +39,16 @@ const Subscriptions = ({}) => {
         const checked = isTopicActive(name);
 
         return (
-            <div className="uk-flex-row">
+            <div
+                className="uk-flex-row uk-width-1-1"
+                style={{ cursor: 'pointer' }}
+                onClick={() => handleTopicChange(name)}
+            >
                 <label className="uk-text-capitalize">
                     <input
                         className="uk-radio uk-margin-right"
                         type="radio"
                         checked={checked}
-                        onChange={() => handleTopicChange(name)}
                     />
                     <span uk-icon={icon} className="uk-margin-right"></span>
                     {name}
@@ -57,9 +60,9 @@ const Subscriptions = ({}) => {
     const subscriptionsRenderer = TOPICS.map(renderSubscription)
 
     return (
-        <div className="uk-box-shadow-medium uk-card uk-card-default uk-position-absolute uk-position-medium uk-position-top-left">
+        <div className="uk-card uk-card-default uk-position-absolute uk-margin-left uk-border-rounded uk-box-shadow-medium">
             <div class="uk-card-body">
-                <p className="uk-text-bold uk-text-warning">Topics</p>
+                <p className="uk-text-bold">Topics</p>
                 <div className="uk-flex-column">
                     {subscriptionsRenderer}
                 </div>

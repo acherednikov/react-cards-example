@@ -64,8 +64,9 @@ const List = ({
     }, [isLoading, data, pageSize, setPage]);
 
     function handleScroll(isLoading, page, scrollContainer, onPageEndReached) {
+        const scroller = scrollContainer.current;
         if (isLoading || !!fetchError) return;
-        if (scrollContainer.current.scrollTop + scrollContainer.current.clientHeight >= scrollContainer.current.scrollHeight) {
+        if (scroller.scrollTop + scroller.clientHeight >= scroller.scrollHeight) {
             onPageEndReached(page + 1)
         }
     }

@@ -125,15 +125,15 @@ const Card = ({
                 onConfirm={restoreConfirmed}
                 onClose={restoreCanceled}
             />
-            <div className="uk-box-shadow-medium uk-card uk-card-default uk-margin-medium-bottom uk-width-1-1">
+            <div className="uk-card uk-card-default uk-margin-medium-bottom uk-width-1-1 uk-border-rounded uk-box-shadow-medium">
                 <div className="uk-card-header">
                     <div className="uk-grid-small uk-flex-middle uk-grid">
                         <div className="uk-width-expand">
                             <h5 className="uk-text-normal uk-text-emphasis">{title}</h5>
                         </div>
                         <div className="uk-width-auto uk-last-column">
-                            <a>
-                                <span uk-icon="comment"/>
+                            <a className="uk-text-warning">
+                                <span uk-icon="bookmark"/>
                             </a>
                         </div>
                     </div>

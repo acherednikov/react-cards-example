@@ -19,6 +19,7 @@ import get from 'lodash/get';
 // Libs
 import { ToastContainer } from 'react-toastify';
 // Components
+import NavigationBar from '../../components/navigation/NavigationBar';
 import Cards from '../../components/cards/Cards';
 
 
@@ -55,6 +56,7 @@ const CardsContainer = props => {
 
     return (
         <>
+            <NavigationBar />
             <ToastContainer />
             <Cards
                 cardsData={cardsData}

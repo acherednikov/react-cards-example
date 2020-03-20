@@ -1,35 +1,28 @@
-* {
-  box-sizing: border-box;
+body > #root > div.bg {
+  height: 100vh;
+}
+
+.bg {
+  background: url(parallax.png) top right no-repeat;
+  background-attachment: fixed;
+  background-size: 100%;
 }
 
 .cards-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  //margin: 0 auto;
-  padding-top: 20px;
-  line-height: 1.3;
-  padding-left: 10%;
-  padding-right: 10%;
+  overflow-y: scroll;
+  height: 100vh;
+  padding-top: 15px;
+  padding-left: 25%;
+  padding-right: 25%;
 }
 
 .card-wrapper {
-  display: flex;
-  width: 300px;
-  margin: 1%;
-
-  //border: 1px solid lightsteelblue;
-  //border-radius: 2px;
-  //box-shadow: 0 3px 34px rgba(0,0,0,.0941176);
+  width: 250px;
 }
 
 .card-content {
   display: flex;
-  flex-direction: column;
-  border-radius: 2px;
-  padding: 1em;
   width: 100%;
-  background-color: whitesmoke;
 }
 
 .card-title {

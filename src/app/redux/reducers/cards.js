@@ -21,6 +21,7 @@ import CardsUtils from '../../services/CardsUtils';
 
 const initialState = {
     collection: {},
+    total: 0,
     isFetching: true,
     bookmarkedCardIds: [],
     deletedCardIds: [], //trashcan
@@ -41,7 +42,8 @@ export default function reducer(state = initialState, action) {
             return {
                 ...state,
                 // collection: CardsUtils.collectionNormalized(action.payload.collection),
-                collection: action.payload.collection,
+                collection: action.payload.articles,
+                total: action.payload.totalResults,
                 isFetching: false,
                 fetchError: null,
             };

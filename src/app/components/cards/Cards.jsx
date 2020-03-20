@@ -4,31 +4,42 @@ import PropTypes from 'prop-types';
 // Libs
 import isEmpty from 'lodash/isEmpty';
 // Components
-import NavigationBar from '../navigation/NavigationBar';
+// import NavigationBar from '../navigation/NavigationBar';
+// import List from '../../components/List';
 import CardContainer from '../../containers/cards/CardContainer';
 
 const propTypes = {
     cardsData: PropTypes.array,
     isLoading: PropTypes.bool,
+    fetchData: PropTypes.func,
 };
 const defaultProps = {
     cardsData: [],
     isLoading: true,
+    fetchData: () => {},
 };
-
 
 const Cards = ({
                    cardsData,
                    isLoading,
+                   fetchData,
                }) => {
 
-    const renderCard = ({ id, title, text }) => {
+    const handleInfiniteScroll = (page) => {
+        fetchData({ page })
+    }
+
+    const renderCard = ({ title, description, author, source, publishedAt, url, urlToImage, }) => {
         return (
             <CardContainer
-                key={id}
-                id={id}
-                text={text}
+                key={title}
+                description={description}
                 title={title}
+                author={author}
+                source={source}
+                publishedAt={publishedAt}
+                url={url}
+                urlToImage={urlToImage}
             />
         )
     };
@@ -36,25 +47,35 @@ const Cards = ({
     const cardsRenderer = cardsData.map(renderCard);
 
     return (
-        <>
-            <NavigationBar />
-            <div className="cards-container">
-                {
-                    isLoading &&
-                    <div uk-spinner="ratio: 2"/>
-                }
+        <div
+            className="bg "
+            
+        >
+            {/* <NavigationBar /> */}
+            <div className="cards-container uk-flex uk-flex-wrap uk-flex-middle uk-flex-center">
                 {
                     !isLoading &&
-                    cardsRenderer
+                    <div>
+                        {cardsRenderer}
+                    </div>
+                }
+                {/* <List
+                    data={cardsData}
+                    isLoading={isLoading}
+                    onPageEndReached={fetchData}
+                >
+                    {cardsRenderer}
+                </List> */}
+                {
+                    isLoading &&
+                    <div className="uk-flex" uk-spinner="ratio: 2"/>
                 }
                 {
                     (isEmpty(cardsRenderer) && !isLoading) &&
-                    <div>
-                        No cards
-                    </div>
+                    <p className="uk-flex uk-text-lead">No cards were found 😔 ...</p>
                 }
             </div>
-        </>
+        </div>
     )
 };
 

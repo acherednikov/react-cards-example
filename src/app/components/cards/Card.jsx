@@ -2,13 +2,20 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 // Libs
+import get from 'lodash/get';
 // Components
 import ModalConfirm from '../ModalConfirm';
 
 
 const propTypes = {
     title: PropTypes.string.isRequired,
-    text: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    author: PropTypes.string,
+    source: PropTypes.object,
+    publishedAt: PropTypes.string,
+    url: PropTypes.string,
+    urlToImage: PropTypes.string,
+
     isProcessing: PropTypes.bool,
     isBookmarked: PropTypes.bool,
     isDeleted: PropTypes.bool,
@@ -17,6 +24,12 @@ const propTypes = {
     handleRestore: PropTypes.func,
 };
 const defaultProps = {
+    author: null,
+    source: {},
+    publishedAt: null,
+    url: null,
+    urlToImage: null,
+
     isProcessing: false,
     isBookmarked: false,
     isDeleted: false,
@@ -27,7 +40,12 @@ const defaultProps = {
 
 const Card = ({
                   title,
-                  text,
+                  description,
+                  author,
+                  source,
+                  publishedAt,
+                  url,
+                  urlToImage,
                   isProcessing,
                   isBookmarked,
                   isDeleted,
@@ -37,6 +55,11 @@ const Card = ({
               }) => {
 
     const [showRestoreModal, toggleRestoreModal] = useState(false);
+
+    const d = new Date(publishedAt || new Date);
+    const dateFormat = new Intl.DateTimeFormat('ru', { year: 'numeric', month: 'long', day: '2-digit' });
+    const [{ value: mo },,{ value: da },,{ value: ye }] = dateFormat.formatToParts(d);
+    const publishedAtFormatted = `${mo} ${da} ${ye}`;
 
     const restoreRequested = () => {
         toggleRestoreModal(true)
@@ -51,6 +74,48 @@ const Card = ({
         toggleRestoreModal(false)
     };
 
+    // const renderControls = () => {
+    //     return (
+    //      <>
+    //      {
+    //         !isDeleted &&
+    //         <button
+    //             // variant="danger"
+    //             className="uk-button uk-button-danger"
+    //             style={{ marginRight: 5 }}
+    //             disabled={isProcessing}
+    //             onClick={handleDelete}
+    //         >
+    //             Delete
+    //         </button>
+    //         }
+    //         {
+    //         isDeleted &&
+    //         <button
+    //             // variant="warning"
+    //             className="uk-button uk-button-secondary"
+    //             style={{ marginRight: 5 }}
+    //             disabled={isProcessing}
+    //             onClick={restoreRequested}
+    //         >
+    //             Restore
+    //         </button>
+    //         }
+    //         {
+    //         !isDeleted &&
+    //         <button
+    //             // variant={isBookmarked ? 'success' : 'primary'}
+    //             className={isBookmarked ? 'uk-button uk-button-primary' : 'uk-button uk-button-default'}
+    //             disabled={isProcessing}
+    //             onClick={handleBookmark}
+    //         >
+    //             {isBookmarked ? 'Bookmarked' : 'Bookmark'}
+    //         </button>
+    //         }
+    //      </>
+    //     )
+    // };
+
     return (
         <>
             <ModalConfirm
@@ -60,62 +125,47 @@ const Card = ({
                 onConfirm={restoreConfirmed}
                 onClose={restoreCanceled}
             />
-            <div className="uk-card uk-card-default uk-margin-small-bottom uk-width-1-1">
+            <div className="card-wrapper uk-box-shadow-medium uk-card uk-card-default uk-margin-small-bottom uk-width-1-1">
                 <div className="uk-card-header">
-                    <div className="uk-grid-small uk-flex-middle uk-grid" uk-grid="">
-                        <div className="uk-width-auto uk-first-column">
-                            {/*<img className="uk-border-circle" width="40" height="40" src="images/avatar.jpg"/>*/}
-                        </div>
+                    <div className="uk-grid-small uk-flex-middle uk-grid">
                         <div className="uk-width-expand">
-                            <h3 className="uk-card-title uk-margin-remove-bottom flex-grow-1">{title}</h3>
-                            {/*<p className="uk-text-meta uk-margin-remove-top">*/}
-                            {/*    <time dateTime="2016-04-01T19:00">April 01, 2016</time>*/}
-                            {/*</p>*/}
+                            <h5 className="uk-text-meta uk-text-bold">{title}</h5>
                         </div>
-                        <a onClick={handleBookmark}>
-                            <span uk-icon="heart"/>
-                        </a>
+                        <div className="uk-width-auto uk-last-column">
+                            <a>
+                                <span uk-icon="comment"/>
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <div className="uk-card-body">
-                    <p>{text}</p>
+                    <div className="uk-grid-small uk-flex-middle uk-grid">
+                        {
+                            !!urlToImage &&
+                            <div className="uk-width-1-5 uk-first-column uk-border-1">
+                                <img className="uk-border-rounded" width="100" height="100" src={urlToImage} />
+                            </div>
+                        }
+                        <div className="uk-width-expand">
+                            <p className="uk-text-left">{description}</p>
+                        </div>
+                    </div>
                 </div>
                 <div className="uk-card-footer">
-                    {
-                        !isDeleted &&
-                        <button
-                            // variant="danger"
-                            className="uk-button uk-button-danger"
-                            style={{ marginRight: 5 }}
-                            disabled={isProcessing}
-                            onClick={handleDelete}
-                        >
-                            Delete
-                        </button>
-                    }
-                    {
-                        isDeleted &&
-                        <button
-                            // variant="warning"
-                            className="uk-button uk-button-secondary"
-                            style={{ marginRight: 5 }}
-                            disabled={isProcessing}
-                            onClick={restoreRequested}
-                        >
-                            Restore
-                        </button>
-                    }
-                    {
-                        !isDeleted &&
-                        <button
-                            // variant={isBookmarked ? 'success' : 'primary'}
-                            className={isBookmarked ? 'uk-button uk-button-primary' : 'uk-button uk-button-default'}
-                            disabled={isProcessing}
-                            onClick={handleBookmark}
-                        >
-                            {isBookmarked ? 'Bookmarked' : 'Bookmark'}
-                        </button>
-                    }
+                    <div className="uk-grid-small uk-flex-middle uk-grid">
+                        <div className="uk-width-expand">
+                            <a
+                                className="uk-text-primary uk-text-small uk-text-italic"
+                                href={url}
+                                target="_blank"
+                            >
+                                {get(source, 'name', 'Unknown source')}
+                            </a>
+                        </div>
+                        <div className="uk-width-auto uk-last-column">
+                            <p className="uk-text-meta">{publishedAtFormatted}</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </>

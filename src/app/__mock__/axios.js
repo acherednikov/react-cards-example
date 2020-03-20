@@ -1,12 +1,13 @@
 const faker = require('faker');
 
-let data = [];
+// let data = [];
+let data = {articles: []};
 
 for (let i = 0; i < 20; i++) {
-    data.push({
+    data.articles.push({
         id: i + 1,
         title: faker.company.companyName(),
-        text: faker.lorem.sentences(),
+        description: faker.lorem.sentences(),
     })
 }
 

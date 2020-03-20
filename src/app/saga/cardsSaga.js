@@ -17,9 +17,11 @@ import {
 } from '../redux/actions/cards';
 // Services
 import CardsApiService from '../services/api/CardsApiService';
+import NewsApiService from '../services/api/NewsApiService';
 
 
 function _cardsCollectionRequest() {
+    // return NewsApiService.fetchFeedTop()
     return CardsApiService.fetchCards()
 }
 

@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 // Libs
-import { Modal, Button } from 'react-bootstrap';
+// import { Modal, Button } from 'react-bootstrap';
 // import Spinner from 'react-bootstrap/Spinner';
 
 const propTypes = {
@@ -27,35 +27,36 @@ const ModalConfirm = ({
                           onClose,
                       }) => {
 
+ 
+    return null;
+    // return (
+    //     <Modal
+    //         show={show}
+    //     >
+    //         <Modal.Header closeButton>
+    //             <Modal.Title>{title}</Modal.Title>
+    //         </Modal.Header>
 
-    return (
-        <Modal
-            show={show}
-        >
-            <Modal.Header closeButton>
-                <Modal.Title>{title}</Modal.Title>
-            </Modal.Header>
+    //         <Modal.Body>
+    //             <p>{message}</p>
+    //         </Modal.Body>
 
-            <Modal.Body>
-                <p>{message}</p>
-            </Modal.Body>
-
-            <Modal.Footer>
-                <Button
-                    variant="secondary"
-                    onClick={onClose}
-                >
-                    Close
-                </Button>
-                <Button
-                    variant="primary"
-                    onClick={onConfirm}
-                >
-                    Okay
-                </Button>
-            </Modal.Footer>
-        </Modal>
-    )
+    //         <Modal.Footer>
+    //             <Button
+    //                 variant="secondary"
+    //                 onClick={onClose}
+    //             >
+    //                 Close
+    //             </Button>
+    //             <Button
+    //                 variant="primary"
+    //                 onClick={onConfirm}
+    //             >
+    //                 Okay
+    //             </Button>
+    //         </Modal.Footer>
+    //     </Modal>
+    // )
 };
 
 ModalConfirm.propTypes = propTypes;

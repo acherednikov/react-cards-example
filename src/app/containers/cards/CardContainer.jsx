@@ -23,16 +23,24 @@ import { toast } from 'react-toastify';
 import Card from '../../components/cards/Card';
 
 const propTypes = {
-    id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
-    text: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    url: PropTypes.string,
+
 };
-const defaultProps = {};
+const defaultProps = {
+    url: null,
+};
 
 const CardContainer = ({
                   id,
                   title,
-                  text,
+                  description,
+                  author,
+                  source,
+                  publishedAt,
+                  url,
+                  urlToImage,
               }) => {
     const dispatch = useDispatch();
 
@@ -67,7 +75,12 @@ const CardContainer = ({
         <Card
             id={id}
             title={title}
-            text={text}
+            description={description}
+            author={author}
+            source={source}
+            publishedAt={publishedAt}
+            url={url}
+            urlToImage={urlToImage}
             isProcessing={isProcessing}
             isBookmarked={isBookmarked}
             isDeleted={isDeleted}

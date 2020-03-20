@@ -41,6 +41,9 @@ const CardsContainer = props => {
     useEffect(() => {
         dispatch(cardsFetchAction())
     }, [dispatch]);
+    // const requestCardsFetch = () => {
+    //     dispatch(cardsFetchAction())
+    // };
 
     return (
         <>
@@ -48,6 +51,7 @@ const CardsContainer = props => {
             <Cards
                 cardsData={cardsData}
                 isLoading={isLoadingCards}
+                // fetchData={requestCardsFetch}
             />
         </>
     )

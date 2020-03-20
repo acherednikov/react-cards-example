@@ -51,13 +51,13 @@ const CardContainer = ({
 
     useEffect(() => {
         if (!isEmpty(errors)) {
-            errors.map((error) => {
+            errors.forEach((error) => {
                 toast(error.error.message, {
                     onOpen: () => dispatch(purgeCardErrorAction(id)),
                 })
             })
         }
-    }, [errors]);
+    }, [errors, dispatch]);
 
     const handleBookmark = () => {
         dispatch(cardBookmarkAction(id))

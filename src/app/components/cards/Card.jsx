@@ -56,14 +56,14 @@ const Card = ({
 
     const [showRestoreModal, toggleRestoreModal] = useState(false);
 
-    const d = new Date(publishedAt || new Date);
+    const d = new Date(publishedAt || new Date());
     const dateFormat = new Intl.DateTimeFormat('ru', { year: 'numeric', month: 'long', day: '2-digit' });
     const [{ value: mo },,{ value: da },,{ value: ye }] = dateFormat.formatToParts(d);
     const publishedAtFormatted = `${mo} ${da} ${ye}`;
 
-    const restoreRequested = () => {
-        toggleRestoreModal(true)
-    };
+    // const restoreRequested = () => {
+    //     toggleRestoreModal(true)
+    // };
 
     const restoreConfirmed = () => {
         handleRestore();
@@ -129,7 +129,7 @@ const Card = ({
                 <div className="uk-card-header">
                     <div className="uk-grid-small uk-flex-middle uk-grid">
                         <div className="uk-width-expand">
-                            <h5 className="uk-text-meta uk-text-bold">{title}</h5>
+                            <h5 className="uk-text-normal uk-text-emphasis">{title}</h5>
                         </div>
                         <div className="uk-width-auto uk-last-column">
                             <a>
@@ -147,7 +147,7 @@ const Card = ({
                             </div>
                         }
                         <div className="uk-width-expand">
-                            <p className="uk-text-left">{description}</p>
+                            <p className="uk-text-left uk-text-emphasis">{description}</p>
                         </div>
                     </div>
                 </div>

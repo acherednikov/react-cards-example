@@ -1,4 +1,4 @@
-import { filter } from 'lodash';
+import { concat, filter } from 'lodash';
 // Actions
 import {
     FETCH_CARDS_REQUESTED,
@@ -20,8 +20,8 @@ import CardsUtils from '../../services/CardsUtils';
 
 
 const initialState = {
-    collection: {},
-    total: 0,
+    collection: [],
+    total: null,
     isFetching: true,
     bookmarkedCardIds: [],
     deletedCardIds: [], //trashcan
@@ -42,7 +42,7 @@ export default function reducer(state = initialState, action) {
             return {
                 ...state,
                 // collection: CardsUtils.collectionNormalized(action.payload.collection),
-                collection: action.payload.articles,
+                collection: concat(state.collection, action.payload.articles),
                 total: action.payload.totalResults,
                 isFetching: false,
                 fetchError: null,

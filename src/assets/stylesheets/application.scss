@@ -1,10 +1,12 @@
 body > #root > div.bg {
   height: 100vh;
+  background-color: black;
 }
 
 .bg {
-overflow-y: scroll;
-  background: url(parallax.png) top right no-repeat;
+  height: 100%;
+  overflow-y: scroll;
+  background: url(parallax.png) center no-repeat;
   background-attachment: fixed;
   background-size: 100%;
   padding-top: 40px;
@@ -16,8 +18,8 @@ overflow-y: scroll;
 }
 
 .filters-container {
-  position: 'absolute';
-  top: '50px';
+  position: absolute;
+  top: 50px;
 }
 
 .card-wrapper {

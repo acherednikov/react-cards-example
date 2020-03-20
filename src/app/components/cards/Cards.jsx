@@ -1,10 +1,10 @@
 // React Core
-import React from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 // Libs
 import isEmpty from 'lodash/isEmpty';
 // Components
-// import List from '../../components/List';
+import List from '../../components/List';
 import CardContainer from '../../containers/cards/CardContainer';
 
 const propTypes = {
@@ -14,7 +14,7 @@ const propTypes = {
 };
 const defaultProps = {
     cardsData: [],
-    isLoading: true,
+    isLoading: false,
     fetchData: () => {},
 };
 
@@ -24,9 +24,12 @@ const Cards = ({
                    fetchData,
                }) => {
 
+    // const scrollContainer = useRef(null).current;
+    const scrollContainer = useRef(null);
+
     const handleInfiniteScroll = (page) => {
-        fetchData({ page })
-    }
+        fetchData(page)
+    };
 
     const renderCard = ({ title, description, author, source, publishedAt, url, urlToImage, }) => {
         return (
@@ -43,45 +46,36 @@ const Cards = ({
         )
     };
 
-    const cardsRenderer = cardsData.map(renderCard);
-
     return (
         <div
-            className="bg "
+            className="bg"
+            ref={scrollContainer}
         >
-            <div class="uk-grid" uk-grid>
-                <div class="uk-width-1-4@m">
+            <div className="uk-grid">
+                <div className="uk-width-1-4@m">
                     <div className="filters-container uk-margin-left uk-grid-small uk-child-width-auto uk-grid">
-                        <label><input className="uk-checkbox" type="checkbox" checked/> US</label>
-                        <label><input className="uk-checkbox" type="checkbox"/> Russia</label>
+                        {/*<label><input className="uk-checkbox" type="checkbox" checked/> US</label>*/}
+                        {/*<label><input className="uk-checkbox" type="checkbox"/> Russia</label>*/}
                     </div>
                 </div>
-                <div class="uk-width-expand@m">
+                <div className="uk-width-expand@m">
                     <div className="cards-container uk-flex uk-flex-wrap uk-flex-middle uk-flex-center">
-                    {
-                        !isLoading &&
-                        <div>
-                            {cardsRenderer}
-                        </div>
-                    }
-                    {/* <List
+                    <List
+                        scrollContainer={scrollContainer}
                         data={cardsData}
                         isLoading={isLoading}
-                        onPageEndReached={fetchData}
-                    >
-                        {cardsRenderer}
-                    </List> */}
+                        cellRenderer={renderCard}
+                        onPageEndReached={handleInfiniteScroll}
+                    />
                     {
-                        isLoading &&
-                        <div className="uk-flex" uk-spinner="ratio: 2"/>
-                    }
-                    {
-                        (isEmpty(cardsRenderer) && !isLoading) &&
-                        <p className="uk-flex uk-text-lead">No cards were found 😔 ...</p>
+                        (isEmpty(cardsData) && !isLoading) &&
+                        <p className="uk-flex uk-text-lead">
+                            <span>No cards were found 😔 ...</span>
+                        </p>
                     }
                     </div>
                 </div>
-                <div class="uk-width-1-4@m"></div>
+                <div className="uk-width-1-4@m"></div>
             </div>
         </div>
     )

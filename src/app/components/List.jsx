@@ -1,63 +1,87 @@
 // React Core
-import React, { useEffect, useState, Children } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 // Libs
-import isEmpty from 'lodash/isEmpty';
+// import isEmpty from 'lodash/isEmpty';
 // Components
 
 const propTypes = {
+    scrollContainer: PropTypes.object.isRequired,
     data: PropTypes.array,
+    pageSize: PropTypes.number,
     isLoading: PropTypes.bool,
+    cellRenderer: PropTypes.func,
     onPageEndReached: PropTypes.func,
 };
 const defaultProps = {
     data: [],
+    pageSize: 20,
     isLoading: true,
+    cellRenderer: () => {},
     onPageEndReached: () => {},
 };
 
 const List = ({
-                children,
-                data,
-                isLoading,
-                onPageEndReached,
-               }) => {
+                  data,
+                  pageSize,
+                  isLoading,
+                  scrollContainer,
+                  cellRenderer,
+                  onPageEndReached,
+              }) => {
 
     const [page, setPage] = useState(0);
 
+    const memoizedHandleScroll = useCallback(
+        () => {
+            handleScroll(isLoading, page, scrollContainer, onPageEndReached);
+        },
+        [isLoading, page, scrollContainer, onPageEndReached],
+    );
+
     useEffect(() => {
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
+        if (!!scrollContainer) {
+            scrollContainer.current.addEventListener('scroll', memoizedHandleScroll)
+        }
+        return () => {
+            if (!!scrollContainer) scrollContainer.current.removeEventListener('scroll', memoizedHandleScroll)
+        }
+    }, [scrollContainer, memoizedHandleScroll]);
 
     useEffect(() => {
         if (page === 0) {
-            setPage((page) => page + 1)
-            onPageEndReached()
+            console.log('-> list initial load');
+            // setPage((page) => page + 1);
+            setPage(1);
+            onPageEndReached(1)
         }
-        // if (!isLoading) {
-        //     setPage((page) => page + 1)
-        // };
-    }, [isLoading, onPageEndReached, setPage]);
+    }, [page, onPageEndReached]);
 
-    function handleScroll() {
-        if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight) return;
+    useEffect(() => {
+        if (!isLoading) {
+            setPage((page) => data.length / pageSize | 0)
+        }
+    }, [isLoading, data, pageSize, setPage]);
+
+    function handleScroll(isLoading, page, scrollContainer, onPageEndReached) {
         if (isLoading) return;
-        console.log('Fetch more list items!');
-        // onPageEndReached(page)
+        if (scrollContainer.current.scrollTop + scrollContainer.current.clientHeight >= scrollContainer.current.scrollHeight) {
+            console.log('==>>> LOAD MORE!!!!', page);
+            onPageEndReached(page + 1)
+        }
     }
+
+    const cardsRenderer = data.map(cellRenderer);
 
     return (
         <>
             {
-                isLoading &&
-                <div className="uk-flex" uk-spinner="ratio: 2"/>
+                // !isLoading &&
+                cardsRenderer
             }
             {
-                !isLoading &&
-                <div className="uk-flex uk-flex-top">
-                    {children}
-                </div>
+                isLoading &&
+                <div className="uk-flex" uk-spinner="ratio: 2"/>
             }
         </>
     )

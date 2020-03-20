@@ -20,9 +20,9 @@ import CardsApiService from '../services/api/CardsApiService';
 import NewsApiService from '../services/api/NewsApiService';
 
 
-function _cardsCollectionRequest() {
-    // return NewsApiService.fetchFeedTop()
-    return CardsApiService.fetchCards()
+function _cardsCollectionRequest(page) {
+    return NewsApiService.fetchFeedTop({ page })
+    // return CardsApiService.fetchCards()
 }
 
 function _cardBookmarkRequest(cardId) {
@@ -42,7 +42,8 @@ function _cardRestoreRequest(cardId) {
 
 function* fetchCards(action) {
     try {
-        const cardsResponse = yield call(_cardsCollectionRequest);
+        const { page } = action.payload;
+        const cardsResponse = yield call(_cardsCollectionRequest, page);
         yield put(cardsFetchSucceeded(cardsResponse.data))
     } catch (error) {
         yield put(cardsFetchFailed(error))

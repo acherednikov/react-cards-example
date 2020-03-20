@@ -1,5 +1,5 @@
 // React Core
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 // React Router
 import { useRouteMatch } from 'react-router-dom';
@@ -36,14 +36,13 @@ const CardsContainer = props => {
     const match = get(useRouteMatch("/:match"), 'params.match', null);
 
     const cardsData = useSelector(state => cardsAsArraySelector(state, match));
+    const totalResults = useSelector(state => state.cards.total);
     const isLoadingCards = useSelector(state => state.cards.isFetching);
 
-    useEffect(() => {
-        dispatch(cardsFetchAction())
-    }, [dispatch]);
-    // const requestCardsFetch = () => {
-    //     dispatch(cardsFetchAction())
-    // };
+    const requestCardsFetch = (page) => {
+        if (totalResults !== null && totalResults === cardsData.length) return;
+        dispatch(cardsFetchAction({ page }))
+    };
 
     return (
         <>
@@ -51,7 +50,7 @@ const CardsContainer = props => {
             <Cards
                 cardsData={cardsData}
                 isLoading={isLoadingCards}
-                // fetchData={requestCardsFetch}
+                fetchData={requestCardsFetch}
             />
         </>
     )

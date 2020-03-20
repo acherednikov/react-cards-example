@@ -3,21 +3,25 @@ body > #root > div.bg {
 }
 
 .bg {
+overflow-y: scroll;
   background: url(parallax.png) top right no-repeat;
   background-attachment: fixed;
   background-size: 100%;
+  padding-top: 40px;
 }
 
 .cards-container {
-  overflow-y: scroll;
   height: 100vh;
-  padding-top: 15px;
-  padding-left: 25%;
-  padding-right: 25%;
+  scrollbar-width: none;
+}
+
+.filters-container {
+  position: 'absolute';
+  top: '50px';
 }
 
 .card-wrapper {
-  width: 250px;
+  width: 400px;
 }
 
 .card-content {

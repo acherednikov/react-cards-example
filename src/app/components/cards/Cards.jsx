@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 // Libs
 import isEmpty from 'lodash/isEmpty';
 // Components
-// import NavigationBar from '../navigation/NavigationBar';
 // import List from '../../components/List';
 import CardContainer from '../../containers/cards/CardContainer';
 
@@ -49,31 +48,40 @@ const Cards = ({
     return (
         <div
             className="bg "
-            
         >
-            {/* <NavigationBar /> */}
-            <div className="cards-container uk-flex uk-flex-wrap uk-flex-middle uk-flex-center">
-                {
-                    !isLoading &&
-                    <div>
-                        {cardsRenderer}
+            <div class="uk-grid" uk-grid>
+                <div class="uk-width-1-4@m">
+                    <div className="filters-container uk-margin-left uk-grid-small uk-child-width-auto uk-grid">
+                        <label><input className="uk-checkbox" type="checkbox" checked/> US</label>
+                        <label><input className="uk-checkbox" type="checkbox"/> Russia</label>
                     </div>
-                }
-                {/* <List
-                    data={cardsData}
-                    isLoading={isLoading}
-                    onPageEndReached={fetchData}
-                >
-                    {cardsRenderer}
-                </List> */}
-                {
-                    isLoading &&
-                    <div className="uk-flex" uk-spinner="ratio: 2"/>
-                }
-                {
-                    (isEmpty(cardsRenderer) && !isLoading) &&
-                    <p className="uk-flex uk-text-lead">No cards were found 😔 ...</p>
-                }
+                </div>
+                <div class="uk-width-expand@m">
+                    <div className="cards-container uk-flex uk-flex-wrap uk-flex-middle uk-flex-center">
+                    {
+                        !isLoading &&
+                        <div>
+                            {cardsRenderer}
+                        </div>
+                    }
+                    {/* <List
+                        data={cardsData}
+                        isLoading={isLoading}
+                        onPageEndReached={fetchData}
+                    >
+                        {cardsRenderer}
+                    </List> */}
+                    {
+                        isLoading &&
+                        <div className="uk-flex" uk-spinner="ratio: 2"/>
+                    }
+                    {
+                        (isEmpty(cardsRenderer) && !isLoading) &&
+                        <p className="uk-flex uk-text-lead">No cards were found 😔 ...</p>
+                    }
+                    </div>
+                </div>
+                <div class="uk-width-1-4@m"></div>
             </div>
         </div>
     )

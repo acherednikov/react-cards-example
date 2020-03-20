@@ -1,7 +1,7 @@
 // Libs
 import axios from "axios";
 
-const API_KEY = ''; // env var
+const API_KEY = '427374fba2eb4ec7a7a913fde6721cf1'; // env var
 
 function fetchFeedTop(queryOptions = {
     category: 'sports',

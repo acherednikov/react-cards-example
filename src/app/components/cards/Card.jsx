@@ -125,7 +125,7 @@ const Card = ({
                 onConfirm={restoreConfirmed}
                 onClose={restoreCanceled}
             />
-            <div className="card-wrapper uk-box-shadow-medium uk-card uk-card-default uk-margin-small-bottom uk-width-1-1">
+            <div className="uk-box-shadow-medium uk-card uk-card-default uk-margin-medium-bottom uk-width-1-1">
                 <div className="uk-card-header">
                     <div className="uk-grid-small uk-flex-middle uk-grid">
                         <div className="uk-width-expand">

@@ -56,23 +56,26 @@ const Card = ({
 
     const [showRestoreModal, toggleRestoreModal] = useState(false);
 
-    const d = new Date(publishedAt || new Date());
-    const dateFormat = new Intl.DateTimeFormat('ru', { year: 'numeric', month: 'long', day: '2-digit' });
-    const [{ value: mo },,{ value: da },,{ value: ye }] = dateFormat.formatToParts(d);
-    const publishedAtFormatted = `${mo} ${da} ${ye}`;
+    const decoratePublishDate = () => {
+        if (!publishedAt) return null;
+
+        const dateFormat = new Intl.DateTimeFormat('ru', { year: 'numeric', month: 'long', day: '2-digit' });
+        const [{ value: mo },,{ value: da },,{ value: ye }] = dateFormat.formatToParts(new Date(publishedAt));
+        return `${mo} ${da} ${ye}`;
+    }
 
     // const restoreRequested = () => {
     //     toggleRestoreModal(true)
     // };
 
-    const restoreConfirmed = () => {
-        handleRestore();
-        toggleRestoreModal(false)
-    };
+    // const restoreConfirmed = () => {
+    //     handleRestore();
+    //     toggleRestoreModal(false)
+    // };
 
-    const restoreCanceled = () => {
-        toggleRestoreModal(false)
-    };
+    // const restoreCanceled = () => {
+    //     toggleRestoreModal(false)
+    // };
 
     // const renderControls = () => {
     //     return (
@@ -118,18 +121,18 @@ const Card = ({
 
     return (
         <>
-            <ModalConfirm
+            {/* <ModalConfirm
                 title="Card Restore"
                 message="Are you want to restore this card?"
                 show={showRestoreModal}
                 onConfirm={restoreConfirmed}
                 onClose={restoreCanceled}
-            />
-            <div className="uk-card uk-card-default uk-margin-medium-bottom uk-width-1-1 uk-border-rounded uk-box-shadow-medium">
+            /> */}
+            <div className="card-wrapper uk-card uk-card-default uk-margin-medium-bottom uk-width-1-1 uk-border-rounded uk-box-shadow-medium">
                 <div className="uk-card-header">
-                    <div className="uk-grid-small uk-flex-middle uk-grid">
-                        <div className="uk-width-expand">
-                            <h5 className="uk-text-normal uk-text-emphasis">{title}</h5>
+                    <div className=" uk-flex-left uk-grid">
+                        <div className="uk-flex uk-width-expand">
+                            <p className="uk-text-bold uk-text-emphasis">{title}</p>
                         </div>
                         <div className="uk-width-auto uk-last-column">
                             <a className="uk-text-warning">
@@ -138,19 +141,22 @@ const Card = ({
                         </div>
                     </div>
                 </div>
-                <div className="uk-card-body">
-                    <div className="uk-grid-small uk-flex-middle uk-grid">
-                        {
-                            !!urlToImage &&
-                            <div className="uk-width-1-5 uk-first-column uk-border-1">
-                                <img className="uk-border-rounded" width="100" height="100" src={urlToImage} />
+                {
+                    !!description &&
+                    <div className="uk-card-body" style={{ padding: '20px 40px' }}>
+                        <div className="uk-grid-small uk-flex-middle uk-grid">
+                            {
+                                !!urlToImage &&
+                                <div className="uk-width-1-5 uk-first-column uk-border-1">
+                                    <img className="uk-border-rounded" width="100" height="100" src={urlToImage} />
+                                </div>
+                            }
+                            <div className="uk-width-expand">
+                                <p className="uk-text-left uk-text-emphasis">{description}</p>
                             </div>
-                        }
-                        <div className="uk-width-expand">
-                            <p className="uk-text-left uk-text-emphasis">{description}</p>
                         </div>
                     </div>
-                </div>
+                }
                 <div className="uk-card-footer">
                     <div className="uk-grid-small uk-flex-middle uk-grid">
                         <div className="uk-width-expand">
@@ -163,7 +169,7 @@ const Card = ({
                             </a>
                         </div>
                         <div className="uk-width-auto uk-last-column">
-                            <p className="uk-text-meta">{publishedAtFormatted}</p>
+                            <p className="uk-text-meta">{decoratePublishDate()}</p>
                         </div>
                     </div>
                 </div>

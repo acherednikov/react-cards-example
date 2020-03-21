@@ -46,7 +46,7 @@ function* fetchCards(action) {
         const cardsResponse = yield call(_cardsCollectionRequest, page, topic);
         yield put(cardsFetchSucceeded(cardsResponse.data))
     } catch (error) {
-        yield put(cardsFetchFailed(error))
+        yield put(cardsFetchFailed(error.response.data.message))
     }
 }
 

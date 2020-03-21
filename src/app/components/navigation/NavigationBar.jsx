@@ -26,9 +26,10 @@ const NavigationBar = props => {
         return (
             <li className={isActive ? "uk-active" : ""}>
                 <NavLink
-                    className={isActive ? "" : "nav-el-inactive"}
+                    className={isActive ? "nav-el-inactive" : "nav-el-inactive"}
                     to={to}
                 >
+                    {/* <p style={{ borderBottom: '2px solid #d8d8d8' }}>{display}</p> */}
                     {display}
                 </NavLink>
             </li>
@@ -36,21 +37,24 @@ const NavigationBar = props => {
     }
 
     return (
-    <nav class="nav-color uk-navbar-container">
-        <div class="uk-navbar-left">
-            <div className="uk-grid uk-width-1-1">
-                <div className="uk-width-1-4">
-                {/* logo */}
-                </div>
-                <div className="uk-width-expand">
-                    <ul class="uk-navbar-nav uk-text-bold">
-                        <ListItemLink to="/cards" display="Featured" />
-                        {/* <ListItemLink to="/search" display="Search" /> */}
-                    </ul>
+        <nav class="nav-color uk-navbar-container">
+            <div class="uk-navbar-left">
+                <div className="uk-grid uk-width-1-1">
+                    <div className="uk-width-1-4">
+                        {/* logo */}
+                    </div>
+                    <div className="uk-width-expand">
+                        <ul class="uk-navbar-nav uk-text-bold">
+                        <div class="uk-navbar-item">
+                            <input class="nav-search-input uk-input uk-form-width-large" type="text" placeholder="..."/>
+                        </div>
+                            {/* <ListItemLink to="/cards" display="" icon="" /> */}
+                            {/* <ListItemLink to="/search" display="Search" /> */}
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
-    </nav>
+        </nav>
     )
 };
 

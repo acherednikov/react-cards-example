@@ -21,7 +21,13 @@ body > #root > div.bg {
 }
 
 .nav-el-inactive {
+  height: 80px;
   color: #d8d8d8 !important;
+}
+
+.nav-search-input {
+  border-radius: 5px;
+  background-color: rgb(233, 227, 231);
 }
 
 .cards-container {
@@ -35,7 +41,13 @@ body > #root > div.bg {
 }
 
 .card-wrapper {
-  width: 400px;
+  border: solid;
+  border-width: 2px;
+  border-color: rgb(163, 133, 154);
+}
+
+.card-header-divier {
+  border-bottom: 2px solid rgb(163, 133, 154) !important;
 }
 
 .card-content {

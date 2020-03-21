@@ -18,7 +18,7 @@ const TOPICS = [
     { name: 'health', icon: 'heart' },
     { name: 'science', icon: 'database' },
     { name: 'technology', icon: 'print' },
-    { name: 'entertainment', icon: 'image' },
+    { name: 'entertainment', icon: 'happy' },
     { name: 'business', icon: 'credit-card' },
     { name: 'sports', icon: 'play-circle' },
 ]
@@ -40,17 +40,18 @@ const Subscriptions = ({}) => {
 
         return (
             <div
+                key={name}
                 className="uk-flex-row uk-width-1-1"
                 style={{ cursor: 'pointer' }}
                 onClick={() => handleTopicChange(name)}
             >
-                <label className="uk-text-capitalize">
+                <label className="uk-text-capitalize uk-text-emphasis">
                     <input
                         className="uk-radio uk-margin-right"
                         type="radio"
                         checked={checked}
                     />
-                    <span uk-icon={icon} className="uk-margin-right"></span>
+                    <span style={{ color: 'rgb(163, 133, 154)' }} uk-icon={icon} className="uk-margin-right"></span>
                     {name}
                 </label>
             </div>
@@ -60,7 +61,7 @@ const Subscriptions = ({}) => {
     const subscriptionsRenderer = TOPICS.map(renderSubscription)
 
     return (
-        <div className="uk-card uk-card-default uk-position-absolute uk-margin-left uk-border-rounded uk-box-shadow-medium">
+        <div className="card-wrapper uk-card uk-card-default uk-position-absolute uk-margin-medium-left uk-border-rounded uk-box-shadow-medium">
             <div class="uk-card-body">
                 <p className="uk-text-bold">Topics</p>
                 <div className="uk-flex-column">

@@ -85,17 +85,13 @@ const List = ({
             {
                 (isEmpty(data) && !isLoading) &&
                 <>
-                    <p className="uk-flex uk-text-lead">
-                        <span>
-                            No cards were found 😔 ... 
-                        </span>
+                    <p className="uk-text-lead">
+                        No cards were found 😔 ... 
                     </p>
                     {
                         !!fetchError &&
                         <p className="uk-flex uk-text-lead">
-                            <span>
-                                {fetchError.message}
-                            </span>
+                            {fetchError.error}
                         </p>
                     }
                 </>

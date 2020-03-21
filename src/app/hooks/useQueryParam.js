@@ -1,14 +1,14 @@
 import { useLocation } from 'react-router-dom';
 
-const useTopic = () => {
+const useQueryParam = (paramName, defaultName) => {
   const query = new URLSearchParams(useQuery());
-  const topic = query.get('topic') || 'general';
+  const param = query.get(paramName) || defaultName;
 
   function useQuery() {
     return new URLSearchParams(useLocation().search);
   }
 
-  return topic
+  return param
 };
 
-export default useTopic;
+export default useQueryParam;

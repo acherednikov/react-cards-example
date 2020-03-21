@@ -7,20 +7,21 @@ export const cardsAsArray = createSelector(
     (state, cardFilter) => state.cards,
     (_, cardFilter) => cardFilter,
     (cardsState = {}, cardFilter = null) => {
-        let collection = cardsState.collection;
+        return cardsState.collection;
+        // let collection = cardsState.collection;
 
-        switch (cardFilter) {
-            case 'bookmarks':
-                collection = CardsUtils.collectionFilteredByIds(collection, cardsState.bookmarkedCardIds);
-                break;
-            case 'trash':
-                collection = CardsUtils.collectionFilteredByIds(collection, cardsState.deletedCardIds);
-                break;
-            default:
-                collection = CardsUtils.collectionFilteredByIds(collection, cardsState.deletedCardIds, true);
-                break;
-        }
-        return collection
+        // switch (cardFilter) {
+        //     case 'bookmarks':
+        //         collection = CardsUtils.collectionFilteredByIds(collection, cardsState.bookmarkedCardIds);
+        //         break;
+        //     case 'trash':
+        //         collection = CardsUtils.collectionFilteredByIds(collection, cardsState.deletedCardIds);
+        //         break;
+        //     default:
+        //         collection = CardsUtils.collectionFilteredByIds(collection, cardsState.deletedCardIds, true);
+        //         break;
+        // }
+        // return collection
     }
 );
 
@@ -33,10 +34,10 @@ export const isCardProcessing = createSelector(
 );
 
 export const isCardBookmarked = createSelector(
-    (state, cardId) => state.cards,
-    (_, cardId) => cardId,
-    (cardsState = {}, cardId = null) => {
-        return includes(cardsState.bookmarkedCardIds, cardId)
+    (state, cardTitle) => state.cards,
+    (_, cardTitle) => cardTitle,
+    (cardsState = {}, cardTitle = null) => {
+        return includes(cardsState.bookmarkedCardTitles, cardTitle)
     }
 );
 

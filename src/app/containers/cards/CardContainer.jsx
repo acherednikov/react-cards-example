@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
 import {
+    cardTitleBookmark as cardTitleBookmarkAction,
     cardBookmarkRequested as cardBookmarkAction,
     cardDeleteRequested as cardDeleteAction,
     cardRestoreRequested as cardRestoreAction,
@@ -44,23 +45,24 @@ const CardContainer = ({
               }) => {
     const dispatch = useDispatch();
 
-    const isProcessing = useSelector(state => isCardProcessingSelector(state, id));
-    const isBookmarked = useSelector(state => isCardBookmarkedSelector(state, id));
-    const isDeleted = useSelector(state => isCardDeletedSelector(state, id));
-    const errors = useSelector(state => cardActionErrorsSelector(state, id));
+    // const isProcessing = useSelector(state => isCardProcessingSelector(state, id));
+    const isBookmarked = useSelector(state => isCardBookmarkedSelector(state, title));
+    // const isDeleted = useSelector(state => isCardDeletedSelector(state, id));
+    // const errors = useSelector(state => cardActionErrorsSelector(state, id));
 
-    useEffect(() => {
-        if (!isEmpty(errors)) {
-            errors.forEach((error) => {
-                toast(error.error.message, {
-                    onOpen: () => dispatch(purgeCardErrorAction(id)),
-                })
-            })
-        }
-    }, [errors, dispatch]);
+    // useEffect(() => {
+    //     if (!isEmpty(errors)) {
+    //         errors.forEach((error) => {
+    //             toast(error.error.message, {
+    //                 onOpen: () => dispatch(purgeCardErrorAction(id)),
+    //             })
+    //         })
+    //     }
+    // }, [errors, dispatch]);
 
     const handleBookmark = () => {
-        dispatch(cardBookmarkAction(id))
+        dispatch(cardTitleBookmarkAction(title))
+        // dispatch(cardBookmarkAction(id))
     };
 
     const handleDelete = () => {
@@ -81,9 +83,9 @@ const CardContainer = ({
             publishedAt={publishedAt}
             url={url}
             urlToImage={urlToImage}
-            isProcessing={isProcessing}
+            // isProcessing={isProcessing}
             isBookmarked={isBookmarked}
-            isDeleted={isDeleted}
+            // isDeleted={isDeleted}
             handleBookmark={handleBookmark}
             handleDelete={handleDelete}
             handleRestore={handleRestore}

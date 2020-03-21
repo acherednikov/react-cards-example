@@ -20,8 +20,10 @@ import CardsApiService from '../services/api/CardsApiService';
 import NewsApiService from '../services/api/NewsApiService';
 
 
-function _cardsCollectionRequest(page, topic) {
-    return NewsApiService.fetchFeedTop({ page, category: topic })
+function _cardsCollectionRequest(page, queryOptions = {}) {
+    console.log('->>> _cardsCollectionRequest', queryOptions.type)
+    if (queryOptions.type === 'featured') return NewsApiService.fetchFeedTop({ page, category: queryOptions.topic })
+    if (queryOptions.type === 'search') return NewsApiService.fetchEverything({ page, q: queryOptions.query, sortBy: queryOptions.sort })
     // return CardsApiService.fetchCards()
 }
 
@@ -42,10 +44,11 @@ function _cardRestoreRequest(cardId) {
 
 function* fetchCards(action) {
     try {
-        const { page, topic } = action.payload;
-        const cardsResponse = yield call(_cardsCollectionRequest, page, topic);
+        const { page, queryOptions } = action.payload;
+        const cardsResponse = yield call(_cardsCollectionRequest, page, queryOptions);
         yield put(cardsFetchSucceeded(cardsResponse.data))
     } catch (error) {
+        console.log('=>>> fetchCards error', error)
         yield put(cardsFetchFailed(error.response.data.message))
     }
 }

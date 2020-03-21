@@ -1,6 +1,7 @@
 body > #root > div.bg {
-  height: 100vh;
-  background-color: black;
+  height: 100%;
+  background: url(parallax.png) center round;
+  background-attachment: fixed;
 }
 
 .news-api-logo {
@@ -10,19 +11,35 @@ body > #root > div.bg {
 .bg {
   height: 100%;
   overflow-y: scroll;
-  background: url(parallax.png) center no-repeat;
-  background-attachment: fixed;
-  background-size: 100%;
+  scrollbar-width: none; /* Firefox */
+
   padding-top: 40px;
+}
+::-webkit-scrollbar { 
+  display: none; /* Chrome Safari */
+}
+
+input.disable {
+  pointer-events: none;
+  opacity: 0.5;
 }
 
 .nav-color {
+  height: 80px;
   background-color:rgb(163, 133, 154) !important;
 }
 
 .nav-el-inactive {
-  height: 80px;
   color: #d8d8d8 !important;
+}
+
+.nav-search-input {
+  border-radius: 5px;
+  background-color: rgb(233, 227, 231);
+}
+
+.nav-bookmarks {
+  border-radius: 5px;
 }
 
 .nav-search-input {
@@ -36,8 +53,7 @@ body > #root > div.bg {
 }
 
 .filters-container {
-  position: absolute;
-  top: 50px;
+  position: fixed;
 }
 
 .card-wrapper {

@@ -4,6 +4,7 @@ import {
     FETCH_CARDS_REQUESTED,
     FETCH_CARDS_SUCCEEDED,
     FETCH_CARDS_FAILED,
+    BOOKMARK_CARD_TITLE,
     BOOKMARK_CARD_REQUESTED,
     BOOKMARK_CARD_SUCCEEDED,
     BOOKMARK_CARD_FAILED,
@@ -23,8 +24,9 @@ const initialState = {
     collection: [],
     total: null,
     isFetching: true,
+    bookmarkedCardTitles: [],
     bookmarkedCardIds: [],
-    deletedCardIds: [], //trashcan
+    deletedCardIds: [],
     processingCardIds: [],
     fetchError: null,
     cardErrors: [],
@@ -53,6 +55,11 @@ export default function reducer(state = initialState, action) {
                 ...state,
                 isFetching: false,
                 fetchError: action.payload,
+            };
+        case BOOKMARK_CARD_TITLE:
+            return {
+                ...state,
+                bookmarkedCardTitles: concat(state.bookmarkedCardTitles, action.payload.cardTitle),
             };
         case BOOKMARK_CARD_REQUESTED:
             return {

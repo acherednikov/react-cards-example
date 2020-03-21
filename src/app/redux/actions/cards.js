@@ -4,6 +4,8 @@ export const FETCH_CARDS_REQUESTED = 'cards/FETCH_CARDS_REQUESTED';
 export const FETCH_CARDS_SUCCEEDED = 'cards/FETCH_CARDS_SUCCEEDED';
 export const FETCH_CARDS_FAILED = 'cards/FETCH_CARDS_FAILED';
 
+export const BOOKMARK_CARD_TITLE = 'cards/BOOKMARK_CARD_TITLE';
+
 export const BOOKMARK_CARD_REQUESTED = 'cards/BOOKMARK_CARD_REQUESTED';
 export const BOOKMARK_CARD_SUCCEEDED = 'cards/BOOKMARK_CARD_SUCCEEDED';
 export const BOOKMARK_CARD_FAILED = 'cards/BOOKMARK_CARD_FAILED';
@@ -19,13 +21,15 @@ export const RESTORE_CARD_FAILED = 'cards/RESTORE_CARD_FAILED';
 export const PURGE_CARD_ERROR = 'cards/PURGE_CARD_ERROR';
 
 
-export const cardsFetchRequested = createAction(FETCH_CARDS_REQUESTED, ({ page, topic, performRefresh }) => ({ page, topic, performRefresh }));
-// export const cardsFetchSucceeded = createAction(FETCH_CARDS_SUCCEEDED, (collection = []) => ({ collection }));
+export const cardsFetchRequested = createAction(FETCH_CARDS_REQUESTED,
+                                   ({ page, queryOptions, performRefresh }) => ({ page, queryOptions, performRefresh }));
 export const cardsFetchSucceeded = createAction(FETCH_CARDS_SUCCEEDED, ({ articles, totalResults }) => ({ articles, totalResults }));
 export const cardsFetchFailed = createAction(
     FETCH_CARDS_FAILED,
     (error = new Error()) => ({ error }),
 );
+
+export const cardTitleBookmark = createAction(BOOKMARK_CARD_TITLE, cardTitle => ({ cardTitle }));
 
 export const cardBookmarkRequested = createAction(BOOKMARK_CARD_REQUESTED, cardId => ({ cardId }));
 export const cardBookmarkSucceeded = createAction(BOOKMARK_CARD_SUCCEEDED, cardId => ({ cardId }));

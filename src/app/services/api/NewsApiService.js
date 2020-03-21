@@ -1,5 +1,10 @@
 // Libs
-import axios from "axios";
+import axios from 'axios';
+// Config
+import {
+    ENDPOINT_FEED_FEATURED,
+    ENDPOINT_FEED_EVERYTHING,
+} from '../../config/Constants';
 
 
 function fetchFeedTop(queryOptions = {}) {
@@ -8,7 +13,23 @@ function fetchFeedTop(queryOptions = {}) {
         country: 'ru',
     };
 
-    return axios.get('http://newsapi.org/v2/top-headlines', {
+    return axios.get(ENDPOINT_FEED_FEATURED, {
+        params: { ...defaultPayload, ...queryOptions },
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Api-Key': process.env.REACT_APP_NEWS_API_KEY,
+        },
+        responseType: 'json',
+    })
+}
+
+function fetchEverything(queryOptions = {}) {
+    const defaultPayload = {
+        q: '',
+        language: 'ru',
+    };
+
+    return axios.get(ENDPOINT_FEED_EVERYTHING, {
         params: { ...defaultPayload, ...queryOptions },
         headers: {
             'Content-Type': 'application/json',
@@ -20,4 +41,5 @@ function fetchFeedTop(queryOptions = {}) {
 
 export default {
     fetchFeedTop,
+    fetchEverything,
 }

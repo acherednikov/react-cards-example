@@ -25,10 +25,6 @@ input[type="text"]
 }
 
 /* Overrides for UIKit theme */
-.uk-navbar-nav > li > p > a {
-  min-height: 80px !important;
-}
-
 .uk-card {
   background-color: rgb(233, 227, 231) !important;
 }

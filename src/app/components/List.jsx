@@ -11,6 +11,7 @@ const propTypes = {
     fetchError: PropTypes.object,
     pageSize: PropTypes.number,
     isLoading: PropTypes.bool,
+    totalResults: PropTypes.number,
     cellRenderer: PropTypes.func,
     onPageEndReached: PropTypes.func,
 };
@@ -19,6 +20,7 @@ const defaultProps = {
     fetchError: null,
     pageSize: 20,
     isLoading: true,
+    totalResults: null,
     cellRenderer: () => {},
     onPageEndReached: () => {},
 };
@@ -28,6 +30,7 @@ const List = ({
                   fetchError,
                   pageSize,
                   isLoading,
+                  totalResults,
                   scrollContainer,
                   cellRenderer,
                   onPageEndReached,
@@ -51,11 +54,19 @@ const List = ({
 
     useEffect(() => {
         if (page === 0 && fetchError === null) {
-            console.log('-> list initial load');
+            console.log('-> list * initial load');
             setPage(1);
             onPageEndReached(1)
         }
     }, [page, onPageEndReached]);
+
+    useEffect(() => {
+        const scroller = scrollContainer.current;
+        if (page === 1 && data.length === 0 && scroller.scrollTop > 0) {
+            console.log('-> list * top scroll');
+            scroller.scrollTo(0, 0)
+        }
+    }, [data, page]);
 
     useEffect(() => {
         if (!isLoading) {
@@ -71,30 +82,35 @@ const List = ({
         }
     }
 
-    const cardsRenderer = data.map(cellRenderer);
+    const listRenderer = data.map(cellRenderer);
 
     return (
         <>
             {
-                cardsRenderer
+                listRenderer
             }
             {
                 isLoading &&
                 <div className="uk-flex" uk-spinner="ratio: 2" style={{ color: 'white' }}/>
             }
             {
+                (totalResults === data.length && totalResults > 0) &&
+                <p className="uk-text-large uk-text-bold uk-text-warning">
+                    You have reached the end of feed
+                    <span> &#129296;</span>
+                </p>
+            }
+            {
                 (isEmpty(data) && !isLoading) &&
-                <>
-                    <p className="uk-text-lead">
-                        No cards were found 😔 ... 
-                    </p>
-                    {
-                        !!fetchError &&
-                        <p className="uk-flex uk-text-lead">
-                            {fetchError.error}
-                        </p>
-                    }
-                </>
+                <p className="uk-text-lead" style={{ color: 'white' }}>
+                    No cards were found 😔 ... 
+                </p>
+            }
+            {
+                !!fetchError &&
+                <p className="uk-flex uk-text-lead" style={{ color: 'white' }}>
+                    {fetchError.error}
+                </p>
             }
         </>
     )

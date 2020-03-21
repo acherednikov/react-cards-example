@@ -55,7 +55,7 @@ const Card = ({
               }) => {
 
     const [showRestoreModal, toggleRestoreModal] = useState(false);
-
+    
     const decoratePublishDate = () => {
         if (!publishedAt) return null;
 
@@ -135,9 +135,11 @@ const Card = ({
                             <p className="uk-text-bold uk-text-emphasis">{title}</p>
                         </div>
                         <div className="uk-width-auto uk-last-column">
-                            <a className="uk-text-warning">
+
+                            <a className="uk-text-warning" onClick={handleBookmark} style={{ fill: `${isBookmarked && 'red'}` }}>
                                 <span uk-icon="bookmark"/>
                             </a>
+                            
                         </div>
                     </div>
                 </div>

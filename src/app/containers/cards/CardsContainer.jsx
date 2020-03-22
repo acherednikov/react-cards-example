@@ -39,6 +39,7 @@ const CardsContainer = props => {
 
     const match = get(useRouteMatch("/:match"), 'params.match', null);
 
+    const country = useQueryParam('country', 'ru');
     const topic = useQueryParam('topic', 'general');
     const searchQuery = useQueryParam('query', null);
     const sort = useQueryParam('sort', 'publishedAt');
@@ -56,20 +57,18 @@ const CardsContainer = props => {
             requestCardsFetch(1, true);
         }
         return () => {}
-    }, [topic, searchQuery, sort]);
+    }, [country, topic, searchQuery, sort]);
 
     const buildQueryOptions = () => {
-        let queryOptions = {};
+        // let queryOptions = { country }; //TODO lang/country (IF feautered - just set current country val;)
+        // IF search get language value by country val FROM lang/country ASSOC obj
+        let queryOptions = { };
 
         if (match === null || match === 'featured') {
-            queryOptions.type = 'featured';
-            queryOptions.topic = topic
+            queryOptions = { ...queryOptions, ...{ type: 'featured', topic, country } }
         }
         if (match === 'search') {
-            // queryOptions = { ...queryOptions,  }
-            queryOptions.type = 'search';
-            queryOptions.query = searchQuery
-            queryOptions.sort = sort
+            queryOptions = { ...queryOptions, ...{ type: 'search', query: searchQuery, sort } }
         }
 
         return queryOptions

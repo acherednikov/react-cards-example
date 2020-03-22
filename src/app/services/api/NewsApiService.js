@@ -7,6 +7,11 @@ import {
 } from '../../config/Constants';
 
 
+const defaultHeaders = {
+    'Content-Type': 'application/json',
+    'X-Api-Key': process.env.REACT_APP_NEWS_API_KEY,
+}
+
 function fetchFeedTop(queryOptions = {}) {
     const defaultPayload = {
         category: 'general',
@@ -15,10 +20,7 @@ function fetchFeedTop(queryOptions = {}) {
 
     return axios.get(ENDPOINT_FEED_FEATURED, {
         params: { ...defaultPayload, ...queryOptions },
-        headers: {
-            'Content-Type': 'application/json',
-            'X-Api-Key': process.env.REACT_APP_NEWS_API_KEY,
-        },
+        headers: defaultHeaders,
         responseType: 'json',
     })
 }
@@ -31,10 +33,7 @@ function fetchEverything(queryOptions = {}) {
 
     return axios.get(ENDPOINT_FEED_EVERYTHING, {
         params: { ...defaultPayload, ...queryOptions },
-        headers: {
-            'Content-Type': 'application/json',
-            'X-Api-Key': process.env.REACT_APP_NEWS_API_KEY,
-        },
+        headers: defaultHeaders,
         responseType: 'json',
     })
 }

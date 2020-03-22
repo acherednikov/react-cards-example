@@ -10,10 +10,14 @@ import { useHistory } from 'react-router-dom';
 //     NavLink,
 // } from 'react-router-dom';
 // Hooks
+import useNavigation from '../../hooks/useNavigation';
 import useQueryParam from '../../hooks/useQueryParam';
-// Services
-import NavigationService from '../../services/NavigationService';
+// Images
 import logo from './logo.svg';
+import iconRu from './icon-ru.png';
+import iconUs from './icon-us.png';
+
+const FLAG_ICONS = { ru: iconRu, us: iconUs };
 
 
 const propTypes = {
@@ -25,9 +29,12 @@ const defaultProps = {
 
 const NavigationBar = props => {
     const history = useHistory();
+    const navigate = useNavigation();
+
+    // const country = useQueryParam('country', 'ru');
     const searchQuery = useQueryParam('query', '');
 
-    const [searchinputValue, setSearchinputValue] = useState(searchQuery);
+    const [searchinputValue, setSearchInputValue] = useState(searchQuery);
     // const match = get(useRouteMatch("/:match"), 'params.match', null);
 
     // function ListItemLink({ to, display }) {
@@ -45,15 +52,20 @@ const NavigationBar = props => {
     //         </li>
     //     )
     // }
+
     const handleSearchInputChange = (event) => {
-        setSearchinputValue(event.currentTarget.value)
+        setSearchInputValue(event.currentTarget.value)
     }
 
     const submitSearch = (event) => {
         const searchQuery = event.currentTarget.value;
-
-        if (event.key === "Enter") NavigationService.navigate(history, 'search', {query: searchQuery, topic: null})
+        // if (event.key === "Enter") navigate('search', { query: searchQuery, topic: null })
+        if (event.key === "Enter") navigate({ path: 'search', params: { query: searchQuery, topic: null } })
     }
+
+    // const selectCountry = ({ value }) => {
+    //     navigate({ params: { country: value } })
+    // }
 
     return (
         <div className="nav-color ">
@@ -61,6 +73,7 @@ const NavigationBar = props => {
                 <div className="uk-grid">
                     <div className="uk-width-1-4">
                         <img
+                            className="uk-height-1-1"
                             style={{ maxHeight: '80px', cursor: 'pointer' }}
                             src={logo}
                             onClick={() => history.push('/')}
@@ -75,12 +88,18 @@ const NavigationBar = props => {
                             onKeyPress={submitSearch}
                             value={searchinputValue}
                         />
-                        <p>
-                            <button className="nav-bookmarks uk-button uk-button-primary uk-margin-medium-left">
+                        <div className="uk-width-1-3 uk-padding-small">
+                            {/* <button className="nav-bookmarks uk-button uk-button-primary uk-margin-medium-left">
                                 <span uk-icon="bookmark"/>
                                 Bookmarks
-                            </button>
-                        </p>
+                            </button> */}
+                            {/* <Select
+                                value={getCountryFromValue()}
+                                onChange={selectCountry}
+                                options={COUNTRIES}
+                                components={{ Option }}
+                            /> */}
+                        </div>
                     </div>
                     <div className="uk-width-1-4">
                     </div>

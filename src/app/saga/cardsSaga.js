@@ -22,8 +22,12 @@ import NewsApiService from '../services/api/NewsApiService';
 
 function _cardsCollectionRequest(page, queryOptions = {}) {
     console.log('->>> _cardsCollectionRequest', queryOptions.type)
-    if (queryOptions.type === 'featured') return NewsApiService.fetchFeedTop({ page, category: queryOptions.topic })
-    if (queryOptions.type === 'search') return NewsApiService.fetchEverything({ page, q: queryOptions.query, sortBy: queryOptions.sort })
+    if (queryOptions.type === 'featured') { 
+        return NewsApiService.fetchFeedTop({ page, category: queryOptions.topic, country: queryOptions.country })
+    }
+    if (queryOptions.type === 'search') {
+        return NewsApiService.fetchEverything({ page, q: queryOptions.query, sortBy: queryOptions.sort, language: queryOptions.country })
+    }
     // return CardsApiService.fetchCards()
 }
 

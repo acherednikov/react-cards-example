@@ -3,7 +3,6 @@ import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import {
   Route,
-  useHistory,
 } from 'react-router-dom';
 // Libs
 import get from 'lodash/get';
@@ -11,12 +10,12 @@ import isEmpty from 'lodash/isEmpty';
 // Components
 // import NavigationBar from '../../components/navigation/NavigationBar';
 import List from '../../components/List';
+import SideMenuFeatured from '../../components/menus/SideMenuFeatured';
 import RadioGroup from '../filters/RadioGroup';
 import CardContainer from '../../containers/cards/CardContainer';
 // Hooks
+import useNavigation from '../../hooks/useNavigation';
 import useQueryParam from '../../hooks/useQueryParam';
-// Services
-import NavigationService from '../../services/NavigationService';
 // Config
 import {
     TOPICS,
@@ -46,8 +45,7 @@ const Cards = ({
                 totalResults,
                 fetchData,
                }) => {
-    const history = useHistory();
-    const topic = useQueryParam('topic', 'general');
+    const navigate = useNavigation();
     const sort = useQueryParam('sort', 'publishedAt');
     const scrollContainer = useRef(null);
 
@@ -70,7 +68,6 @@ const Cards = ({
         )
     };
 
-
     return (
         <Route exact path={["/", "/featured", "/search"]}>
             <div
@@ -79,22 +76,14 @@ const Cards = ({
             >
                 <div className="uk-grid">
                     <div className="uk-width-1-4@m uk-flex uk-flex-center">
-                        <Route exact path={["/", "/featured"]}>
-                            <RadioGroup
-                                filtersName="Topics"
-                                filtersData={TOPICS}
-                                activeRadio={topic}
-                                enabled={!isEmpty(cardsData)}
-                                handleChange={(name) => NavigationService.navigate(history, 'featured', {topic: name})}
-                            />
-                         </Route>
-                         <Route exact path="/search">
+                        <SideMenuFeatured enabled={!isEmpty(cardsData)} />
+                        <Route exact path="/search">
                             <RadioGroup
                                 filtersName="Sort"
                                 filtersData={SORT}
                                 activeRadio={sort}
                                 enabled={!isEmpty(cardsData)}
-                                handleChange={(name) => NavigationService.navigate(history, 'search', {sort: name})}
+                                handleChange={(name) => navigate({ path: 'search', params: { sort: name } })}
                             />
                          </Route>
                     </div>

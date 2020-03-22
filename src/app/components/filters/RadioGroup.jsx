@@ -75,7 +75,7 @@ const RadioGroup = ({
     const radiosRenderer = filtersData.map(renderRadio)
 
     return (
-        <div className="filters-container card-wrapper uk-card uk-card-default uk-border-rounded uk-box-shadow-medium">
+        <div className="card-wrapper uk-card uk-card-default uk-border-rounded uk-box-shadow-medium">
             <div className="uk-card-body">
                 <p className="uk-text-bold">{filtersName}</p>
                 <div className="uk-flex-column">

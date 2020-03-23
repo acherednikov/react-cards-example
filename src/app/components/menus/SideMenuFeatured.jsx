@@ -15,8 +15,10 @@ import { TOPICS, COUNTRIES } from '../../config/Constants';
 
 
 const propTypes = {
+    enabled: PropTypes.bool,
 };
 const defaultProps = {
+    enabled: true,
 };
 
 const SideMenuFeatured = ({ enabled }) => {
@@ -25,16 +27,15 @@ const SideMenuFeatured = ({ enabled }) => {
     const topic = useQueryParam('topic', 'general');
     const country = useQueryParam('country', 'ru');
 
-    const onChangeCountry = ({ value }) => {
-        navigate({ params: { country: value } })
+    const onChangeCountry = ({ country }) => {
+        navigate({ params: { country } })
     }
 
-    const onChangeTopic = (name) => {
-        navigate({ path: 'featured', params: { topic: name } })
+    const onChangeTopic = (topic) => {
+        navigate({ path: 'featured', params: { topic } })
     }
 
     const getCountryFromValue = () => {
-    console.log('==>>> getCountryFromValue', { COUNTRIES,country})
         return find(COUNTRIES, { value: country })
     }
 
@@ -43,7 +44,7 @@ const SideMenuFeatured = ({ enabled }) => {
             <Route exact path={["/", "/featured"]}>
                 <div className="uk-margin">
                     <SelectGroup
-                        filtersName="Countries"
+                        filtersName="Country"
                         filtersData={COUNTRIES}
                         activeOption={getCountryFromValue()}
                         enabled={enabled}

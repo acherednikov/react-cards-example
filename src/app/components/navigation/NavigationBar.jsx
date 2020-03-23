@@ -31,7 +31,6 @@ const NavigationBar = props => {
     const history = useHistory();
     const navigate = useNavigation();
 
-    // const country = useQueryParam('country', 'ru');
     const searchQuery = useQueryParam('query', '');
 
     const [searchinputValue, setSearchInputValue] = useState(searchQuery);
@@ -59,13 +58,10 @@ const NavigationBar = props => {
 
     const submitSearch = (event) => {
         const searchQuery = event.currentTarget.value;
-        // if (event.key === "Enter") navigate('search', { query: searchQuery, topic: null })
-        if (event.key === "Enter") navigate({ path: 'search', params: { query: searchQuery, topic: null } })
+        if (event.key === "Enter") {
+            navigate({ path: 'search', params: { query: searchQuery, topic: null, country: null } })
+        }
     }
-
-    // const selectCountry = ({ value }) => {
-    //     navigate({ params: { country: value } })
-    // }
 
     return (
         <div className="nav-color ">
@@ -93,12 +89,6 @@ const NavigationBar = props => {
                                 <span uk-icon="bookmark"/>
                                 Bookmarks
                             </button> */}
-                            {/* <Select
-                                value={getCountryFromValue()}
-                                onChange={selectCountry}
-                                options={COUNTRIES}
-                                components={{ Option }}
-                            /> */}
                         </div>
                     </div>
                     <div className="uk-width-1-4">

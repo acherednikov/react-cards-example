@@ -16,7 +16,7 @@ const propTypes = {
 };
 const defaultProps = {
     enabled: true,
-    handleChange: () => {},
+    handleChange: undefined,
 };
 
 const RadioGroup = ({

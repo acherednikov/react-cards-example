@@ -1,26 +1,15 @@
 // React Core
 import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
-import {
-  Route,
-} from 'react-router-dom';
+import { Route } from 'react-router-dom';
 // Libs
-import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
 // Components
 // import NavigationBar from '../../components/navigation/NavigationBar';
 import List from '../../components/List';
 import SideMenuFeatured from '../../components/menus/SideMenuFeatured';
-import RadioGroup from '../filters/RadioGroup';
+import SideMenuAdvanced from '../menus/SideMenuAdvanced';
 import CardContainer from '../../containers/cards/CardContainer';
-// Hooks
-import useNavigation from '../../hooks/useNavigation';
-import useQueryParam from '../../hooks/useQueryParam';
-// Config
-import {
-    TOPICS,
-    SORT,
-} from '../../config/Constants';
 
 
 const propTypes = {
@@ -45,8 +34,6 @@ const Cards = ({
                 totalResults,
                 fetchData,
                }) => {
-    const navigate = useNavigation();
-    const sort = useQueryParam('sort', 'publishedAt');
     const scrollContainer = useRef(null);
 
     const handleInfiniteScroll = (page) => {
@@ -77,15 +64,7 @@ const Cards = ({
                 <div className="uk-grid">
                     <div className="uk-width-1-4@m uk-flex uk-flex-center">
                         <SideMenuFeatured enabled={!isEmpty(cardsData)} />
-                        <Route exact path="/search">
-                            <RadioGroup
-                                filtersName="Sort"
-                                filtersData={SORT}
-                                activeRadio={sort}
-                                enabled={!isEmpty(cardsData)}
-                                handleChange={(name) => navigate({ path: 'search', params: { sort: name } })}
-                            />
-                         </Route>
+                        <SideMenuAdvanced enabled={!isEmpty(cardsData)} />
                     </div>
                     <div className="uk-width-expand@m">
                         <div className="cards-container uk-flex uk-flex-wrap uk-flex-middle uk-flex-center">

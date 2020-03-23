@@ -12,7 +12,7 @@ import Select, { components } from 'react-select';
 const propTypes = {
     filtersName: PropTypes.string.isRequired,
     filtersData: PropTypes.array.isRequired,
-    activeOption: PropTypes.string.isRequired,
+    activeOption: PropTypes.object.isRequired,
     enabled: PropTypes.bool,
     handleChange: PropTypes.func,
     optionRenderer: PropTypes.func,

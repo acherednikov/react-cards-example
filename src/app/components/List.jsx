@@ -43,6 +43,7 @@ const List = ({
         [isLoading, page, scrollContainer, onPageEndReached],
     );
 
+    //TODO TypeError: scrollContainer.current is null
     useEffect(() => {
         if (!!scrollContainer) {
             scrollContainer.current.addEventListener('scroll', memoizedHandleScroll)

@@ -4,7 +4,9 @@ import PropTypes from 'prop-types';
 // Libs
 import get from 'lodash/get';
 // Components
-import ModalConfirm from '../ModalConfirm';
+// import ModalConfirm from '../ModalConfirm';
+// Services
+import DateTimeService from '../../services/DateTimeService';
 
 
 const propTypes = {
@@ -166,6 +168,7 @@ const Card = ({
                                 className="uk-text-primary uk-text-small uk-text-italic"
                                 href={url}
                                 target="_blank"
+                                rel="noopener noreferrer"
                             >
                                 {get(source, 'name', 'Unknown source')}
                             </a>

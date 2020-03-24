@@ -27,7 +27,7 @@ const SideMenuFeatured = ({ enabled }) => {
     const topic = useQueryParam('topic', 'general');
     const country = useQueryParam('country', 'ru');
 
-    const onChangeCountry = ({ country }) => {
+    const onChangeCountry = (country) => {
         navigate({ params: { country } })
     }
 

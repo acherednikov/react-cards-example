@@ -24,18 +24,17 @@ const defaultProps = {
 };
 
 const SelectGroup = ({
-                     filtersName,
-                     filtersData,
-                     activeOption,
-                     enabled,
-                     handleChange,
-                     optionRenderer,
-                    }) => {
+                        filtersName,
+                        filtersData,
+                        activeOption,
+                        enabled,
+                        handleChange,
+                        optionRenderer,
+                     }) => {
     const history = useHistory();
 
-    const handleOptionChange = (name) => {
-        if (!enabled) return;
-        handleChange(name)
+    const handleOptionChange = (option) => {
+        handleChange(option.value)
     }
 
     const Option = props => { 

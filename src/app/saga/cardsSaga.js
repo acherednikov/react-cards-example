@@ -25,7 +25,7 @@ function _cardsCollectionRequest(page, queryOptions = {}) {
         return NewsApiService.fetchFeedTop({ page, category: queryOptions.topic, country: queryOptions.country })
     }
     if (queryOptions.type === 'search') {
-        return NewsApiService.fetchEverything({ page, q: queryOptions.query, sortBy: queryOptions.sort, language: queryOptions.country })
+        return NewsApiService.fetchEverything({ page, q: queryOptions.query, sortBy: queryOptions.sort, language: queryOptions.language })
     }
     // return CardsApiService.fetchCards()
 }

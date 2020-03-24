@@ -1,19 +1,18 @@
-body > #root > div.bg {
-  height: 100%;
-  background: url(parallax.png) center round;
-  background-attachment: fixed;
-}
 
 .news-api-logo {
   background-image: url(news-api-logo.png)
 }
 
-
 .bg {
+  height: 100%;
+  background: url(bg-dawn-sky.png) center round;
+  background-attachment: fixed;
+}
+
+.scroller {
   height: 100%;
   overflow-y: scroll;
   scrollbar-width: none; /* Firefox */
-
   padding-top: 40px;
 }
 ::-webkit-scrollbar { 

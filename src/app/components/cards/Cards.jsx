@@ -61,7 +61,7 @@ const Cards = ({
                 className="bg"
                 ref={scrollContainer}
             >
-                <div className="uk-grid">
+                <div className="uk-grid scroller">
                     <div className="uk-width-1-4@m uk-flex uk-flex-center">
                         <SideMenuFeatured enabled={!isEmpty(cardsData)} />
                         <SideMenuAdvanced enabled={!isEmpty(cardsData)} />

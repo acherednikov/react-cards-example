@@ -15,17 +15,17 @@ export const COUNTRIES = [
     { value: 'es', label: 'España' },
 ]
 
-// export const LANGUAGES_COUNTRIES = {
-//     ru: ['ru'] ,
-//     en: ['us', 'gb'],
-//     pt: ['pt', 'br'],
-//     fr: ['fr'],
-//     de: ['de'],
-//     it: ['it'],
-//     ja: ['jp'],
-//     es: ['es'],
-//     sv: ['se'],
-// }
+export const LANGUAGES = [
+    { value: 'ru', label: 'Руссий' },
+    { value: 'en', label: 'English' },
+    { value: 'pt', label: 'Portuguese' },
+    { value: 'fr', label: 'French' },
+    { value: 'de', label: 'German' },
+    { value: 'it', label: 'Italian' },
+    { value: 'ja', label: 'Japanese' },
+    { value: 'es', label: 'Spanish' },
+    { value: 'sv', label: 'Swedish' },
+]
 
 export const TOPICS = [
     { name: 'general', icon: 'world' },

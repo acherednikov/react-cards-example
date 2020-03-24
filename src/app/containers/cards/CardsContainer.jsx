@@ -41,7 +41,8 @@ const CardsContainer = props => {
 
     const country = useQueryParam('country', 'ru');
     const topic = useQueryParam('topic', 'general');
-    const searchQuery = useQueryParam('query', null);
+    const searchQuery = useQueryParam('query', '');
+    const language = useQueryParam('language', 'ru');
     const sort = useQueryParam('sort', 'publishedAt');
     const from = useQueryParam('from', null);
     const to = useQueryParam('to', null);
@@ -59,7 +60,7 @@ const CardsContainer = props => {
             requestCardsFetch(1, true);
         }
         return () => {}
-    }, [country, topic, searchQuery, sort, from, to]);
+    }, [country, topic, searchQuery, language, sort, from, to]);
 
     const buildQueryOptions = () => {
         let queryOptions = { };
@@ -69,7 +70,7 @@ const CardsContainer = props => {
         }
         if (match === 'search') {
             queryOptions = { 
-                ...queryOptions, ...{ type: 'search', query: searchQuery, sort, from, to }
+                ...queryOptions, ...{ type: 'search', query: searchQuery, language, sort, from, to }
             }
         }
 

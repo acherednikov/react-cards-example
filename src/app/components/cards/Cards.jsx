@@ -5,7 +5,6 @@ import { Route } from 'react-router-dom';
 // Libs
 import isEmpty from 'lodash/isEmpty';
 // Components
-// import NavigationBar from '../../components/navigation/NavigationBar';
 import List from '../../components/List';
 import SideMenuFeatured from '../../components/menus/SideMenuFeatured';
 import SideMenuAdvanced from '../menus/SideMenuAdvanced';
@@ -57,11 +56,8 @@ const Cards = ({
 
     return (
         <Route exact path={["/", "/featured", "/search"]}>
-            <div
-                className="bg"
-                ref={scrollContainer}
-            >
-                <div className="uk-grid scroller">
+            <div className="bg">
+                <div className="uk-grid scroller" ref={scrollContainer}>
                     <div className="uk-width-1-4@m uk-flex uk-flex-center">
                         <SideMenuFeatured enabled={!isEmpty(cardsData)} />
                         <SideMenuAdvanced enabled={!isEmpty(cardsData)} />

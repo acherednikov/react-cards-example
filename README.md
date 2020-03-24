@@ -1,5 +1,11 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+Project feed powered by [Newsapi](https://newsapi.org/docs/endpoints/everything)
+
+## ENV vars
+
+REACT_APP_NEWS_API_KEY
+
 ## Available Scripts
 
 In the project directory, you can run:

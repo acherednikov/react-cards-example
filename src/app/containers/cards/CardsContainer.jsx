@@ -85,7 +85,7 @@ const CardsContainer = props => {
     };
 
     return (
-        <>
+        <div className="bg">
             <NavigationBar />
             <ToastContainer />
             <Cards
@@ -95,7 +95,7 @@ const CardsContainer = props => {
                 totalResults={totalResults}
                 fetchData={requestCardsFetch}
             />
-        </>
+        </div>
     )
 
 };

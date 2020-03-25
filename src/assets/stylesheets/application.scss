@@ -1,4 +1,8 @@
 
+body {
+  overflow-y: hidden;
+}
+
 .news-api-logo {
   background-image: url(news-api-logo.png)
 }
@@ -11,9 +15,10 @@
 
 .scroller {
   height: 100%;
+  padding-top: 40px;
+  padding-bottom: 40px;
   overflow-y: scroll;
   scrollbar-width: none; /* Firefox */
-  padding-top: 40px;
 }
 ::-webkit-scrollbar { 
   display: none; /* Chrome Safari */
@@ -24,7 +29,7 @@ input.disable {
   opacity: 0.5;
 }
 
-.nav-color {
+.nav-bar-themed {
   height: 80px;
   background-color:rgb(163, 133, 154) !important;
 }

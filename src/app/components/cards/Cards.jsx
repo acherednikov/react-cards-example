@@ -56,28 +56,26 @@ const Cards = ({
 
     return (
         <Route exact path={["/", "/featured", "/search"]}>
-            <div className="bg">
-                <div className="uk-grid scroller" ref={scrollContainer}>
+                <div className="uk-flex uk-grid scroller" ref={scrollContainer}>
                     <div className="uk-width-1-4@m uk-flex uk-flex-center">
                         <SideMenuFeatured enabled={!isEmpty(cardsData)} />
                         <SideMenuAdvanced enabled={!isEmpty(cardsData)} />
                     </div>
                     <div className="uk-width-expand@m">
                         <div className="cards-container uk-flex uk-flex-wrap uk-flex-middle uk-flex-center">
-                        <List
-                            scrollContainer={scrollContainer}
-                            data={cardsData}
-                            fetchError={fetchError}
-                            isLoading={isLoading}
-                            totalResults={totalResults}
-                            cellRenderer={renderCard}
-                            onPageEndReached={handleInfiniteScroll}
-                        />
+                            <List
+                                scrollContainer={scrollContainer}
+                                data={cardsData}
+                                fetchError={fetchError}
+                                isLoading={isLoading}
+                                totalResults={totalResults}
+                                cellRenderer={renderCard}
+                                onPageEndReached={handleInfiniteScroll}
+                            />
                         </div>
                     </div>
                     <div className="uk-width-1-4@m"></div>
                 </div>
-            </div>
         </Route>
     )
 };

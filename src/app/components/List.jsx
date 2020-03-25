@@ -87,12 +87,10 @@ const List = ({
 
     return (
         <>
-            {
-                listRenderer
-            }
+            { listRenderer }
             {
                 isLoading &&
-                <div className="uk-flex" uk-spinner="ratio: 2" style={{ color: 'white' }}/>
+                <div uk-spinner="ratio: 2" style={{ color: 'white' }}/>
             }
             {
                 (totalResults === data.length && totalResults > 0) &&

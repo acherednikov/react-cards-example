@@ -64,7 +64,7 @@ const NavigationBar = props => {
     }
 
     return (
-        <div className="nav-color ">
+        <div className="nav-bar-themed">
             <div className="uk-width-1-1">
                 <div className="uk-grid">
                     <div className="uk-width-1-4">

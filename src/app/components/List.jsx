@@ -35,7 +35,6 @@ const List = ({
                   cellRenderer,
                   onPageEndReached,
               }) => {
-
     const [page, setPage] = useState(0);
 
     const memoizedHandleScroll = useCallback(

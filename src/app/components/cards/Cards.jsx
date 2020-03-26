@@ -56,13 +56,13 @@ const Cards = ({
 
     return (
         <Route exact path={["/", "/featured", "/search"]}>
-                <div className="uk-flex uk-grid scroller" ref={scrollContainer}>
-                    <div className="uk-width-1-4@m uk-flex uk-flex-center">
+                <div className="content uk-flex uk-grid">
+                    <div className="uk-width-1-4@m uk-flex uk-flex-center" style={{ paddingTop: '40px' }}>
                         <SideMenuFeatured enabled={!isEmpty(cardsData)} />
                         <SideMenuAdvanced enabled={!isEmpty(cardsData)} />
                     </div>
                     <div className="uk-width-expand@m">
-                        <div className="cards-container uk-flex uk-flex-wrap uk-flex-middle uk-flex-center">
+                        <div className="scroller uk-flex uk-flex-wrap uk-flex-middle uk-flex-center" ref={scrollContainer}>
                             <List
                                 scrollContainer={scrollContainer}
                                 data={cardsData}

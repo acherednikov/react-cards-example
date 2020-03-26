@@ -1,6 +1,6 @@
 
-body {
-  overflow-y: hidden;
+html, body {
+  height: 100vh;
 }
 
 .news-api-logo {
@@ -8,13 +8,15 @@ body {
 }
 
 .bg {
-  height: 100%;
   background: url(bg-dawn-sky.png) center round;
-  background-attachment: fixed;
+}
+
+.content {
+  overflow-y: auto;
 }
 
 .scroller {
-  height: 100%;
+  height: 100vh;
   padding-top: 40px;
   padding-bottom: 40px;
   overflow-y: scroll;
@@ -52,11 +54,6 @@ input.disable {
   background-color: rgb(233, 227, 231);
 }
 
-.cards-container {
-  height: 100vh;
-  scrollbar-width: none;
-}
-
 .filters-container {
   position: fixed;
 }
@@ -69,22 +66,4 @@ input.disable {
 
 .card-header-divier {
   border-bottom: 2px solid rgb(163, 133, 154) !important;
-}
-
-.card-content {
-  display: flex;
-  width: 100%;
-}
-
-.card-title {
-  border-bottom: 1px solid lightblue;
-}
-
-.card-text {
-  flex: 1 0 auto;
-}
-
-.card-controls-wrapper {
-  display: flex;
-  flex-direction: row;
 }

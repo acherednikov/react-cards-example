@@ -44,11 +44,13 @@ const List = ({
 
     //TODO TypeError: scrollContainer.current is null
     useEffect(() => {
-        if (!!scrollContainer) {
-            scrollContainer.current.addEventListener('scroll', memoizedHandleScroll)
+        const scroller = scrollContainer.current;
+
+        if (!!scroller) {
+            scroller.addEventListener('scroll', memoizedHandleScroll)
         }
         return () => {
-            if (!!scrollContainer) scrollContainer.current.removeEventListener('scroll', memoizedHandleScroll)
+            if (!!scroller) scroller.removeEventListener('scroll', memoizedHandleScroll)
         }
     }, [scrollContainer, memoizedHandleScroll]);
 
@@ -66,7 +68,7 @@ const List = ({
             console.log('-> list * top scroll');
             scroller.scrollTo(0, 0)
         }
-    }, [data, page]);
+    }, [data, page, scrollContainer]);
 
     useEffect(() => {
         if (!isLoading) {

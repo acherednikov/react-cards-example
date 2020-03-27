@@ -1,9 +1,7 @@
 // React Core
-import React, { useRef } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { useHistory  } from 'react-router-dom';
 // Libs
-import find from 'lodash/find';
 import DatePicker from 'react-datepicker';
 // Components
 // Services
@@ -34,11 +32,11 @@ const DateRangeGroup = ({
 
     const dateFormated = (date = new Date()) => {
         return DateTimeService.dateFormat(date)
-    }
+    };
 
     const handleDateChange = (type, date) => {
         handleChange(type, dateFormated(date))
-    }
+    };
 
     return (
         <div className="card-wrapper uk-card uk-card-default uk-border-rounded uk-box-shadow-medium">
@@ -65,7 +63,7 @@ const DateRangeGroup = ({
             </div>
         </div>
     )
-}
+};
 
 DateRangeGroup.propTypes = propTypes;
 DateRangeGroup.defaultProps = defaultProps;

@@ -1,5 +1,5 @@
 // React Core
-import React, { useRef } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Route } from 'react-router-dom';
 // Libs
@@ -29,15 +29,15 @@ const SideMenuFeatured = ({ enabled }) => {
 
     const onChangeCountry = (country) => {
         navigate({ params: { country } })
-    }
+    };
 
     const onChangeTopic = (topic) => {
         navigate({ path: 'featured', params: { topic } })
-    }
+    };
 
     const getCountryFromValue = () => {
         return find(COUNTRIES, { value: country })
-    }
+    };
 
     return (
         <div className="filters-container">

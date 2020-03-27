@@ -14,10 +14,6 @@ import useNavigation from '../../hooks/useNavigation';
 import useQueryParam from '../../hooks/useQueryParam';
 // Images
 import logo from './logo.svg';
-import iconRu from './icon-ru.png';
-import iconUs from './icon-us.png';
-
-const FLAG_ICONS = { ru: iconRu, us: iconUs };
 
 
 const propTypes = {
@@ -33,7 +29,7 @@ const NavigationBar = props => {
 
     const searchQuery = useQueryParam('query', '');
 
-    const [searchinputValue, setSearchInputValue] = useState(searchQuery);
+    const [searchInputValue, setSearchInputValue] = useState(searchQuery);
     // const match = get(useRouteMatch("/:match"), 'params.match', null);
 
     // function ListItemLink({ to, display }) {
@@ -54,14 +50,14 @@ const NavigationBar = props => {
 
     const handleSearchInputChange = (event) => {
         setSearchInputValue(event.currentTarget.value)
-    }
+    };
 
     const submitSearch = (event) => {
         const searchQuery = event.currentTarget.value;
         if (event.key === "Enter") {
             navigate({ path: 'search', params: { query: searchQuery, topic: null, country: null } })
         }
-    }
+    };
 
     return (
         <div className="nav-bar-themed">
@@ -82,7 +78,7 @@ const NavigationBar = props => {
                             placeholder="..."
                             onChange={handleSearchInputChange}
                             onKeyPress={submitSearch}
-                            value={searchinputValue}
+                            value={searchInputValue}
                         />
                         <div className="uk-width-1-3 uk-padding-small">
                             {/* <button className="nav-bookmarks uk-button uk-button-primary uk-margin-medium-left">

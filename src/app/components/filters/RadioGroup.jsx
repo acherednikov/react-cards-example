@@ -1,7 +1,6 @@
 // React Core
-import React, { useRef } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { useHistory  } from 'react-router-dom';
 // Libs
 // Components
 // Config
@@ -20,22 +19,21 @@ const defaultProps = {
 };
 
 const RadioGroup = ({
-                     filtersName,
-                     filtersData,
-                     activeRadio,
-                     enabled,
-                     handleChange,
+                        filtersName,
+                        filtersData,
+                        activeRadio,
+                        enabled,
+                        handleChange,
                     }) => {
-    const history = useHistory();
 
     const isRadioActive = (name) => {
         return activeRadio === name
-    }
+    };
 
     const handleRadioChange = (name) => {
         if (!enabled) return;
         handleChange(name)
-    }
+    };
 
     const renderRadio = ({ name, icon }) => {
         const checked = isRadioActive(name);
@@ -56,7 +54,8 @@ const RadioGroup = ({
                         type="radio"
                         checked={checked}
                         disabled={!enabled}
-                        onChange={() => {}}
+                        onChange={() => {
+                        }}
                     />
                     {
                         !!icon &&
@@ -70,7 +69,7 @@ const RadioGroup = ({
                 </label>
             </div>
         )
-    }
+    };
 
     const radiosRenderer = filtersData.map(renderRadio)
 
@@ -87,7 +86,7 @@ const RadioGroup = ({
             </div>
         </div>
     )
-}
+};
 
 RadioGroup.propTypes = propTypes;
 RadioGroup.defaultProps = defaultProps;

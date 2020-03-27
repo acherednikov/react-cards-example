@@ -23,15 +23,15 @@ const defaultProps = {
     fetchError: null,
     isLoading: false,
     totalResults: null,
-    fetchData: () => {},
+    fetchData: undefined,
 };
 
 const Cards = ({
-                cardsData,
-                fetchError,
-                isLoading,
-                totalResults,
-                fetchData,
+                   cardsData,
+                   fetchError,
+                   isLoading,
+                   totalResults,
+                   fetchData,
                }) => {
     const scrollContainer = useRef(null);
 
@@ -56,26 +56,24 @@ const Cards = ({
 
     return (
         <Route exact path={["/", "/featured", "/search"]}>
-                <div className="content uk-flex uk-grid">
-                    <div className="uk-width-1-4@m uk-flex uk-flex-center" style={{ paddingTop: '40px' }}>
-                        <SideMenuFeatured enabled={!isEmpty(cardsData)} />
-                        <SideMenuAdvanced enabled={!isEmpty(cardsData)} />
-                    </div>
-                    <div className="uk-width-expand@m">
-                        <div className="scroller uk-flex uk-flex-wrap uk-flex-middle uk-flex-center" ref={scrollContainer}>
-                            <List
-                                scrollContainer={scrollContainer}
-                                data={cardsData}
-                                fetchError={fetchError}
-                                isLoading={isLoading}
-                                totalResults={totalResults}
-                                cellRenderer={renderCard}
-                                onPageEndReached={handleInfiniteScroll}
-                            />
-                        </div>
-                    </div>
-                    <div className="uk-width-1-4@m"></div>
+            <div className="uk-flex uk-grid">
+                <div className="uk-width-1-4@m uk-flex uk-flex-center" style={{ paddingTop: '40px' }}>
+                    <SideMenuFeatured enabled={!isEmpty(cardsData)}/>
+                    <SideMenuAdvanced enabled={!isEmpty(cardsData)}/>
                 </div>
+                <div className="scroller uk-width-expand@m uk-flex uk-flex-wrap uk-flex-middle uk-flex-center" ref={scrollContainer}>
+                    <List
+                        scrollContainer={scrollContainer}
+                        data={cardsData}
+                        fetchError={fetchError}
+                        isLoading={isLoading}
+                        totalResults={totalResults}
+                        cellRenderer={renderCard}
+                        onPageEndReached={handleInfiniteScroll}
+                    />
+                </div>
+                <div className="uk-width-1-4@m"></div>
+            </div>
         </Route>
     )
 };

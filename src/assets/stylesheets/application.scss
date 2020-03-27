@@ -1,18 +1,14 @@
 
-html, body {
-  height: 100vh;
+html {
+  background: url(bg-dawn-sky.png) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 .news-api-logo {
-  background-image: url(news-api-logo.png)
-}
-
-.bg {
-  background: url(bg-dawn-sky.png) center round;
-}
-
-.content {
-  overflow-y: auto;
+  background-image: url(news-api-logo.png);
 }
 
 .scroller {
@@ -20,10 +16,10 @@ html, body {
   padding-top: 40px;
   padding-bottom: 40px;
   overflow-y: scroll;
-  scrollbar-width: none; /* Firefox */
+  //scrollbar-width: none; /* Firefox */
 }
-::-webkit-scrollbar { 
-  display: none; /* Chrome Safari */
+::-webkit-scrollbar {
+  //display: none; /* Chrome Safari */
 }
 
 input.disable {
@@ -33,6 +29,9 @@ input.disable {
 
 .nav-bar-themed {
   height: 80px;
+  //position: fixed;
+  //top: 0;
+  //width: 100%;
   background-color:rgb(163, 133, 154) !important;
 }
 

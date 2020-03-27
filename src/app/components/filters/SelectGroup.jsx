@@ -1,9 +1,7 @@
 // React Core
-import React, { useRef } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { useHistory  } from 'react-router-dom';
 // Libs
-import find from 'lodash/find';
 import Select, { components } from 'react-select';
 // Components
 // Config
@@ -24,21 +22,19 @@ const defaultProps = {
 };
 
 const SelectGroup = ({
-                        filtersName,
-                        filtersData,
-                        activeOption,
-                        enabled,
-                        handleChange,
-                        optionRenderer,
+                         filtersName,
+                         filtersData,
+                         activeOption,
+                         enabled,
+                         handleChange,
                      }) => {
-    const history = useHistory();
 
     const handleOptionChange = (option) => {
         handleChange(option.value)
-    }
+    };
 
-    const Option = props => { 
-        return ( 
+    const Option = props => {
+        return (
             <div>
                 <components.Option {...props}>
                     {/* <img style={{ width: '25px', height: '25px' }} src={FLAG_ICONS[props.value]} /> */}
@@ -52,20 +48,20 @@ const SelectGroup = ({
         <div className="card-wrapper uk-card uk-card-default uk-border-rounded uk-box-shadow-medium">
             <div className="uk-card-body">
                 <p className="uk-text-bold">{filtersName}</p>
-                    <Select
-                        value={activeOption}
-                        isDisabled={!enabled}
-                        onChange={handleOptionChange}
-                        options={filtersData}
-                        components={{ Option }}
-                    />      
+                <Select
+                    value={activeOption}
+                    isDisabled={!enabled}
+                    onChange={handleOptionChange}
+                    options={filtersData}
+                    components={{ Option }}
+                />
             </div>
             <div className="uk-card-footer">
                 <p className="uk-text-meta">powered by <span className="news-api-logo uk-icon uk-icon-image"/></p>
             </div>
         </div>
     )
-}
+};
 
 SelectGroup.propTypes = propTypes;
 SelectGroup.defaultProps = defaultProps;

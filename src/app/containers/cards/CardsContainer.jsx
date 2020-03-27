@@ -75,7 +75,7 @@ const CardsContainer = props => {
         }
 
         return queryOptions
-    }
+    };
 
     const requestCardsFetch = (page, refresh = false) => {
         if (totalResults !== null && totalResults === cardsData.length && !refresh) return;
@@ -85,7 +85,7 @@ const CardsContainer = props => {
     };
 
     return (
-        <div className="bg">
+        <div className="uk-flex uk-flex-column">
             <NavigationBar />
             <ToastContainer />
             <Cards

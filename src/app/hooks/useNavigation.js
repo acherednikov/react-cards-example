@@ -1,5 +1,5 @@
 import { useHistory } from 'react-router-dom';
-import { get, reduce, compact, pickBy, identity } from 'lodash';
+import { get, pickBy, identity } from 'lodash';
 
 
 const useNavigation = () => {

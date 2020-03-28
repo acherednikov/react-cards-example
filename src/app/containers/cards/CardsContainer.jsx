@@ -39,6 +39,7 @@ const CardsContainer = props => {
 
     const match = get(useRouteMatch("/:match"), 'params.match', null);
 
+    //TODO how to set default params in search/?
     const country = useQueryParam('country', 'ru');
     const topic = useQueryParam('topic', 'general');
     const searchQuery = useQueryParam('query', '');

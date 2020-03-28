@@ -45,7 +45,7 @@ const SelectGroup = ({
     };
 
     return (
-        <div className="uk-flex-column">
+        <div className="uk-flex uk-flex-column">
             <p className="uk-text-bold" style={{ margin: '0 0 5px 0', color: 'black' }}>{filtersName}</p>
             <Select
                 value={activeOption}

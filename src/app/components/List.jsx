@@ -119,6 +119,7 @@ const List = ({
                 </p>
             }
             {
+                //TODO add refresher
                 !!fetchError &&
                 <p className="uk-flex uk-text-lead" style={{ color: 'white' }}>
                     {fetchError.error}

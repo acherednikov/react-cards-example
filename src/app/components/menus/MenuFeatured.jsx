@@ -5,7 +5,6 @@ import { Route } from 'react-router-dom';
 // Libs
 import find from 'lodash/find';
 // Components
-import RadioGroup from '../filters/RadioGroup';
 import SelectGroup from '../filters/SelectGroup';
 // Hooks
 import useNavigation from '../../hooks/useNavigation';
@@ -67,30 +66,6 @@ const MenuFeatured = ({ enabled }) => {
             </div>
         </Route>
     )
-
-
-    // return (
-    //     <div className="filters-container">
-    //         <Route exact path={["/", "/featured"]}>
-    //             <div className="uk-margin">
-    //                 <SelectGroup
-    //                     filtersName="Country"
-    //                     filtersData={COUNTRIES}
-    //                     activeOption={getCountryFromValue()}
-    //                     enabled={enabled}
-    //                     handleChange={onChangeCountry}
-    //                 />
-    //             </div>
-    //             <RadioGroup
-    //                 filtersName="Topics"
-    //                 filtersData={TOPICS}
-    //                 activeRadio={topic}
-    //                 enabled={enabled}
-    //                 handleChange={onChangeTopic}
-    //             />
-    //         </Route>
-    //     </div>
-    // )
 }
 
 MenuFeatured.propTypes = propTypes;

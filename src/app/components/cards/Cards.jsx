@@ -3,7 +3,7 @@ import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Route } from 'react-router-dom';
 // Libs
-import isEmpty from 'lodash/isEmpty';
+// import isEmpty from 'lodash/isEmpty';
 // Components
 import List from '../../components/List';
 import SideMenuFeatured from '../menus/MenuFeatured';
@@ -40,10 +40,11 @@ const Cards = ({
     };
 
     const renderFilters = () => {
+        const enabled = !isLoading;
         return (
             <>
-                <SideMenuFeatured enabled={!isEmpty(cardsData)}/>
-                <SideMenuAdvanced enabled={!isEmpty(cardsData)}/>
+                <SideMenuFeatured enabled={enabled}/>
+                <SideMenuAdvanced enabled={enabled}/>
             </>
         )
     }

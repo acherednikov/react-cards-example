@@ -12,12 +12,16 @@ const useNavigation = () => {
       const currentParamsIterator = new URLSearchParams(currentParamsString).entries();
       const currentParamsObject = paramsIteratorToObject(currentParamsIterator);
 
+      const to = (path === null) ? history.location.pathname : path
+
+      if (params === null) {
+        history.push(to);
+        return
+      }
+
       let mergedParams = {...currentParamsObject, ...params};
       mergedParams = pickBy(mergedParams, identity); // remove falsey values
       const mergedParamsString = new URLSearchParams(mergedParams).toString();
-
-      console.log('=> useNavigation', history.location.pathname)
-      const to = (path === null) ? history.location.pathname : path
 
       history.push(to + '?' + mergedParamsString)
   }

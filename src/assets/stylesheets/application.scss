@@ -12,14 +12,14 @@ html {
 }
 
 .scroller {
-  height: 100vh;
-  padding-top: 40px;
-  padding-bottom: 40px;
+  height: 90vh;
+  padding-top: 20px;
+  //padding-bottom: 40px;
   overflow-y: scroll;
-  //scrollbar-width: none; /* Firefox */
+  scrollbar-width: none; /* Firefox */
 }
 ::-webkit-scrollbar {
-  //display: none; /* Chrome Safari */
+  display: none; /* Chrome Safari */
 }
 
 input.disable {
@@ -35,12 +35,18 @@ input.disable {
   background-color:rgb(163, 133, 154) !important;
 }
 
+.nav-el-active {
+  color: black !important;
+}
+
 .nav-el-inactive {
   color: #d8d8d8 !important;
 }
 
 .nav-search-input {
   border-radius: 5px;
+  border-width: 2px;
+  border-color:  rgb(163, 133, 154);
   background-color: rgb(233, 227, 231);
 }
 
@@ -51,6 +57,15 @@ input.disable {
 .nav-search-input {
   border-radius: 5px;
   background-color: rgb(233, 227, 231);
+}
+
+.filters-card {
+  padding: 15px;
+  border: solid;
+  border-radius: 5px;
+  border-width: 2px;
+  border-color:  rgb(163, 133, 154);
+  background-color: rgb(233, 227, 231) !important;
 }
 
 .filters-container {

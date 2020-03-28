@@ -6,8 +6,8 @@ import { Route } from 'react-router-dom';
 import isEmpty from 'lodash/isEmpty';
 // Components
 import List from '../../components/List';
-import SideMenuFeatured from '../../components/menus/SideMenuFeatured';
-import SideMenuAdvanced from '../menus/SideMenuAdvanced';
+import SideMenuFeatured from '../menus/MenuFeatured';
+import SideMenuAdvanced from '../menus/MenuAdvanced';
 import CardContainer from '../../containers/cards/CardContainer';
 
 
@@ -39,6 +39,15 @@ const Cards = ({
         fetchData(page)
     };
 
+    const renderFilters = () => {
+        return (
+            <>
+                <SideMenuFeatured enabled={!isEmpty(cardsData)}/>
+                <SideMenuAdvanced enabled={!isEmpty(cardsData)}/>
+            </>
+        )
+    }
+
     const renderCard = ({ title, description, author, source, publishedAt, url, urlToImage, }) => {
         return (
             <CardContainer
@@ -58,8 +67,6 @@ const Cards = ({
         <Route exact path={["/", "/featured", "/search"]}>
             <div className="uk-flex uk-grid">
                 <div className="uk-width-1-4@m uk-flex uk-flex-center" style={{ paddingTop: '40px' }}>
-                    <SideMenuFeatured enabled={!isEmpty(cardsData)}/>
-                    <SideMenuAdvanced enabled={!isEmpty(cardsData)}/>
                 </div>
                 <div className="scroller uk-width-expand@m uk-flex uk-flex-wrap uk-flex-middle uk-flex-center" ref={scrollContainer}>
                     <List
@@ -68,6 +75,7 @@ const Cards = ({
                         fetchError={fetchError}
                         isLoading={isLoading}
                         totalResults={totalResults}
+                        headerRenderer={renderFilters}
                         cellRenderer={renderCard}
                         onPageEndReached={handleInfiniteScroll}
                     />

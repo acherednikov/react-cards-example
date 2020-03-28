@@ -42,8 +42,8 @@ const CardsContainer = props => {
     const country = useQueryParam('country', 'ru');
     const topic = useQueryParam('topic', 'general');
     const searchQuery = useQueryParam('query', '');
-    const language = useQueryParam('language', 'ru');
-    const sort = useQueryParam('sort', 'publishedAt');
+    const language = useQueryParam('language', null);
+    const sort = useQueryParam('sort', null);
     const from = useQueryParam('from', null);
     const to = useQueryParam('to', null);
 

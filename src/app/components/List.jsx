@@ -22,9 +22,11 @@ const defaultProps = {
     isLoading: true,
     totalResults: null,
     cellRenderer: () => {},
+    headerRenderer: undefined,
     onPageEndReached: () => {},
 };
 
+// TODO back to top
 const List = ({
                   data,
                   fetchError,
@@ -32,6 +34,7 @@ const List = ({
                   isLoading,
                   totalResults,
                   scrollContainer,
+                  headerRenderer,
                   cellRenderer,
                   onPageEndReached,
               }) => {
@@ -88,10 +91,19 @@ const List = ({
 
     return (
         <>
-            { listRenderer }
+            {
+                <div className="uk-width-1-1" style={{ alignSelf: 'start' }}>
+                 { headerRenderer() }
+                </div>
+            }
+            {
+                listRenderer
+            }
             {
                 isLoading &&
-                <div uk-spinner="ratio: 2" style={{ color: 'white' }}/>
+                <div className="uk-width-1-1" style={{ alignItems: 'center' }}>
+                    <div className="uk-flex" uk-spinner="ratio: 2" style={{ color: 'white' }}/>
+                </div>
             }
             {
                 (totalResults === data.length && totalResults > 0) &&

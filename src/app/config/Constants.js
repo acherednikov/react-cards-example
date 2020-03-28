@@ -28,17 +28,17 @@ export const LANGUAGES = [
 ]
 
 export const TOPICS = [
-    { name: 'general', icon: 'world' },
-    { name: 'health', icon: 'heart' },
-    { name: 'science', icon: 'database' },
-    { name: 'technology', icon: 'print' },
-    { name: 'entertainment', icon: 'happy' },
-    { name: 'business', icon: 'info' },
-    { name: 'sports', icon: 'play-circle' },
+    { value: 'general', label: 'General' },
+    { value: 'health', label: 'Health' },
+    { value: 'science', label: 'Science' },
+    { value: 'technology', label: 'Technology' },
+    { value: 'entertainment', label: 'Entertainment' },
+    { value: 'business', label: 'Business' },
+    { value: 'sports', label: 'Sports' },
 ]
 
 export const SORT = [
-    { name: 'relevancy', icon: null },
-    { name: 'popularity', icon: null },
-    { name: 'publishedAt', icon: null },
+    { value: 'relevancy', label: 'Relevancy' },
+    { value: 'popularity', label: 'Popularity' },
+    { value: 'publishedAt', label: 'Published At' },
 ]

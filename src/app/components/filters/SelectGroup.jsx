@@ -45,22 +45,35 @@ const SelectGroup = ({
     };
 
     return (
-        <div className="card-wrapper uk-card uk-card-default uk-border-rounded uk-box-shadow-medium">
-            <div className="uk-card-body">
-                <p className="uk-text-bold">{filtersName}</p>
-                <Select
-                    value={activeOption}
-                    isDisabled={!enabled}
-                    onChange={handleOptionChange}
-                    options={filtersData}
-                    components={{ Option }}
-                />
-            </div>
-            <div className="uk-card-footer">
-                <p className="uk-text-meta">powered by <span className="news-api-logo uk-icon uk-icon-image"/></p>
-            </div>
+        <div className="uk-flex-column">
+            <p className="uk-text-bold" style={{ margin: '0 0 5px 0', color: 'black' }}>{filtersName}</p>
+            <Select
+                value={activeOption}
+                isDisabled={!enabled}
+                onChange={handleOptionChange}
+                options={filtersData}
+                components={{ Option }}
+            />
         </div>
     )
+
+    // return (
+    //     <div className="card-wrapper uk-card uk-card-default uk-border-rounded uk-box-shadow-medium">
+    //         <div className="uk-card-body">
+    //             <p className="uk-text-bold">{filtersName}</p>
+    //             <Select
+    //                 value={activeOption}
+    //                 isDisabled={!enabled}
+    //                 onChange={handleOptionChange}
+    //                 options={filtersData}
+    //                 components={{ Option }}
+    //             />
+    //         </div>
+    //         <div className="uk-card-footer">
+    //             <p className="uk-text-meta">powered by <span className="news-api-logo uk-icon uk-icon-image"/></p>
+    //         </div>
+    //     </div>
+    // )
 };
 
 SelectGroup.propTypes = propTypes;

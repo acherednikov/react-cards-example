@@ -10,7 +10,12 @@ import SelectGroup from '../filters/SelectGroup';
 import useNavigation from '../../hooks/useNavigation';
 import useQueryParam from '../../hooks/useQueryParam';
 // Config
-import { TOPICS, COUNTRIES } from '../../config/Constants';
+import {
+    TOPICS,
+    COUNTRIES,
+    DEFAULT_TOPIC,
+    DEFAULT_COUNTRY,
+} from '../../config/Conent';
 
 
 const propTypes = {
@@ -23,8 +28,8 @@ const defaultProps = {
 const MenuFeatured = ({ enabled }) => {
     const navigate = useNavigation();
 
-    const topic = useQueryParam('topic', 'general');
-    const country = useQueryParam('country', 'ru');
+    const topic = useQueryParam('topic', DEFAULT_TOPIC.value);
+    const country = useQueryParam('country',  DEFAULT_COUNTRY.value);
 
     const onChangeCountry = (country) => {
         navigate({ params: { country } })

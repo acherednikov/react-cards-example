@@ -5,7 +5,7 @@ import { Route } from 'react-router-dom';
 // Libs
 import find from 'lodash/find';
 // Components
-import DateRangeGroup from '../filters/DateRangeGroup';
+import DateGroup from '../filters/DateGroup';
 import SelectGroup from '../filters/SelectGroup';
 // Hooks
 import useNavigation from '../../hooks/useNavigation';
@@ -13,7 +13,13 @@ import useQueryParam from '../../hooks/useQueryParam';
 // Services
 import DateTimeService from '../../services/DateTimeService';
 // Config
-import { SORT, LANGUAGES } from '../../config/Constants';
+// Config
+import {
+    LANGUAGES,
+    SORT,
+    DEFAULT_LANGUAGE,
+    DEFAULT_SORT,
+} from '../../config/Conent';
 
 
 const propTypes = {
@@ -23,12 +29,13 @@ const defaultProps = {
     enabled: true,
 };
 
+//TODO range validations
 const MenuAdvanced = ({ enabled }) => {
     const navigate = useNavigation();
 
     const searchQuery = useQueryParam('query', '');
-    const language = useQueryParam('language', 'ru');
-    const sort = useQueryParam('sort', 'publishedAt');
+    const language = useQueryParam('language', DEFAULT_LANGUAGE.value);
+    const sort = useQueryParam('sort', DEFAULT_SORT.value);
     const dateFrom = useQueryParam('from', null);
     const dateTo = useQueryParam('to', null);
 
@@ -74,6 +81,9 @@ const MenuAdvanced = ({ enabled }) => {
         return find(SORT, { value: sort })
     }
 
+    const dateFromParsed = dateParse(dateFrom);
+    const dateToParsed = dateParse(dateTo);
+
     return (
         <Route exact path="/search">
             <div className="filters-card uk-flex-column uk-width-1-1 uk-margin-bottom">
@@ -88,7 +98,7 @@ const MenuAdvanced = ({ enabled }) => {
                         disabled={!enabled}
                     />
                 </div>
-                <div className="uk-flex uk-flex-row">
+                <div className="uk-flex uk-flex-row" style={{ paddingBottom: '15px' }}>
                     <div className="uk-width-1-2@s">
                         <SelectGroup
                             filtersName="Language"
@@ -98,7 +108,7 @@ const MenuAdvanced = ({ enabled }) => {
                             handleChange={onChangeLanguage}
                         />
                     </div>
-                    <div class="uk-width-1-2@s">
+                    <div class="uk-width-1-2@s" style={{ marginLeft: '20px' }}>
                         <SelectGroup
                             filtersName="Sort"
                             filtersData={SORT}
@@ -108,6 +118,24 @@ const MenuAdvanced = ({ enabled }) => {
                         />
                     </div>
                 </div>
+
+                <div className="uk-flex uk-flex-row">
+                    <div className="uk-width-1-2@s">
+                        <DateGroup
+                            date={dateFromParsed}
+                            dateType="from"
+                            handleChange={onChangeDate}
+                        />
+                    </div>
+                    <div className="uk-width-1-2@s" style={{ marginLeft: '20px' }}>
+                        <DateGroup
+                            date={dateToParsed}
+                            dateType="to"
+                            handleChange={onChangeDate}
+                        />
+                    </div>
+                </div>
+                
             </div>
         </Route>
     )

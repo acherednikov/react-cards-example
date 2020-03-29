@@ -1,8 +1,13 @@
-// ENDPOTINS
-export const ENDPOINT_FEED_FEATURED = 'http://newsapi.org/v2/top-headlines';
-export const ENDPOINT_FEED_EVERYTHING = 'http://newsapi.org/v2/everything';
+export const TOPICS = [
+    { value: 'general', label: 'General' },
+    { value: 'health', label: 'Health' },
+    { value: 'science', label: 'Science' },
+    { value: 'technology', label: 'Technology' },
+    { value: 'entertainment', label: 'Entertainment' },
+    { value: 'business', label: 'Business' },
+    { value: 'sports', label: 'Sports' },
+]
 
-// CONTENT
 export const COUNTRIES = [
     { value: 'ru', label: 'Россия' },
     { value: 'us', label: 'Unisted States' },
@@ -16,8 +21,8 @@ export const COUNTRIES = [
 ]
 
 export const LANGUAGES = [
-    { value: 'ru', label: 'Руссий' },
     { value: 'en', label: 'English' },
+    { value: 'ru', label: 'Руссий' },
     { value: 'pt', label: 'Portuguese' },
     { value: 'fr', label: 'French' },
     { value: 'de', label: 'German' },
@@ -27,18 +32,13 @@ export const LANGUAGES = [
     { value: 'sv', label: 'Swedish' },
 ]
 
-export const TOPICS = [
-    { value: 'general', label: 'General' },
-    { value: 'health', label: 'Health' },
-    { value: 'science', label: 'Science' },
-    { value: 'technology', label: 'Technology' },
-    { value: 'entertainment', label: 'Entertainment' },
-    { value: 'business', label: 'Business' },
-    { value: 'sports', label: 'Sports' },
-]
-
 export const SORT = [
+    { value: 'publishedAt', label: 'Published At' },
     { value: 'relevancy', label: 'Relevancy' },
     { value: 'popularity', label: 'Popularity' },
-    { value: 'publishedAt', label: 'Published At' },
 ]
+
+export const DEFAULT_TOPIC = TOPICS[0];
+export const DEFAULT_COUNTRY = COUNTRIES[0];
+export const DEFAULT_LANGUAGE = LANGUAGES[0];
+export const DEFAULT_SORT = SORT[0];

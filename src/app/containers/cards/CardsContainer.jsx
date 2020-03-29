@@ -21,6 +21,13 @@ import { ToastContainer } from 'react-toastify';
 // Components
 import NavigationBar from '../../components/navigation/NavigationBar';
 import Cards from '../../components/cards/Cards';
+// Config
+import {
+    DEFAULT_TOPIC,
+    DEFAULT_COUNTRY,
+    DEFAULT_LANGUAGE,
+    DEFAULT_SORT,
+} from '../../config/Conent';
 
 
 const propTypes = {
@@ -40,11 +47,11 @@ const CardsContainer = props => {
     const match = get(useRouteMatch("/:match"), 'params.match', null);
 
     //TODO how to set default params in search/?
-    const country = useQueryParam('country', 'ru');
-    const topic = useQueryParam('topic', 'general');
+    const topic = useQueryParam('topic', DEFAULT_TOPIC.value);
+    const country = useQueryParam('country', DEFAULT_COUNTRY.value);
     const searchQuery = useQueryParam('query', '');
-    const language = useQueryParam('language', null);
-    const sort = useQueryParam('sort', null);
+    const language = useQueryParam('language', DEFAULT_LANGUAGE.value);
+    const sort = useQueryParam('sort', DEFAULT_SORT.value);
     const from = useQueryParam('from', null);
     const to = useQueryParam('to', null);
 

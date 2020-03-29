@@ -4,7 +4,7 @@ import axios from 'axios';
 import {
     ENDPOINT_FEED_FEATURED,
     ENDPOINT_FEED_EVERYTHING,
-} from '../../config/Constants';
+} from '../../config/Endpoints';
 
 
 const defaultHeaders = {

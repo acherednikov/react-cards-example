@@ -70,6 +70,7 @@ const CardsContainer = props => {
         return () => {}
     }, [country, topic, searchQuery, language, sort, from, to]);
 
+    //TODO params whitelists
     const buildQueryOptions = () => {
         let queryOptions = { };
 
